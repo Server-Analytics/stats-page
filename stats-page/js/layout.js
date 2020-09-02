@@ -1,6 +1,6 @@
 setTimeout(() => {
     addComponent("layout", "statsLayout");
-    components.jquery_layout.load("ajax/displayData/stats/statsLayout.php");
+    components.jquery_layout.load("ajax/displayData/stats/stats-page/stats-page/statsLayout.php");
 }, 1000);
 
 // Global Options
@@ -34,7 +34,7 @@ function statLayoutLoaded() {
 
         let statTabContainer = $(`#${statTab}`);
 
-        statTabContainer.load(`ajax/displayData/stats/tabs/${preloadedStatsTabs[statTab]}`);
+        statTabContainer.load(`ajax/displayData/stats/stats-page/stats-page/tabs/${preloadedStatsTabs[statTab]}`);
 
         console.log(`[${Math.round(((i+1)/Object.keys(preloadedStatsTabs).length)*100)}%] Pre-Loaded #${statTab} tab`);
         if (i + 1 >= Object.keys(preloadedStatsTabs).length) console.groupEnd();

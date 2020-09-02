@@ -89,4 +89,4 @@
 <div id="statsLayout" class="statsLayout"></div>
 
 <!-- JS scripts -->
-<script src="../src/js/pages/client/stats/layout.js"></script>
+<script src="ajax/displayData/stats/stats-page/stats-page/js/layout.js"></script>
