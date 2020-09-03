@@ -1,6 +1,6 @@
 setTimeout(() => {
     addComponent("layout", "statsLayout");
-    components.jquery_layout.load("ajax/displayData/stats/stats-page/stats-page/statsLayout.php");
+    components.jquery_layout.load("ajax/displayData/stats/stats-page/stats-page/statsLayout.html");
 }, 1000);
 
 // Global Options
@@ -18,10 +18,10 @@ refreshStatsDatas(GlobalOptions.selectedTimerange)
 
 // StatsTabs to keep loaded during navigation
 let preloadedStatsTabs = {
-    "statTab1": "tab_dashboard.php",
-    "statTab2": "tab_my_stats.php",
-    "statTab3": "tab_messages.php",
-    "statTab4": "tab_members.php"
+    "statTab1": "tab_dashboard.html",
+    "statTab2": "tab_my_stats.html",
+    "statTab3": "tab_messages.html",
+    "statTab4": "tab_members.html"
 }
 
 // When fully loaded, hide the global-container then reveal the stats layout
@@ -279,6 +279,10 @@ function overwriteStats(prefixId) {
 
             } else if (method.split("-")[1] == "chevron") {
                 // Indicator alternative
+            } else if (method.split("-")[1] == "simpleIndicator") {
+
+                result = subFormattedResult[0] == 0 ? "+" : subFormattedResult[0] > 1 ? "+" : "-";
+
             }
         }
 
