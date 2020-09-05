@@ -130,13 +130,16 @@ function loadStatTab(tabId, loadUrl) {
 // Refresh stats datas
 function refreshStatsDatas(timerange) {
 
+    if (!timerange)
+        timerange = GlobalOptions.selectedTimerange;
+
     if (!DATAS_timeranges[timerange]) return console.warn("Warning » Couldn't refresh datas. Timerange id specified doesn't exist.")
     GlobalOptions.selectedTimerange = timerange;
 
     if (!DATAS_timeranges[GlobalOptions.selectedTimerange])
         return console.error(`Error: Cannot refresh statsDatas; "${timerange}" timerange ID doesn't exist.`);
 
-    console.group("Refreshing stats datas: (From " + DATAS_timeranges[3][1].length + " total stats elements)");
+    console.group("Refreshing stats datas: (From " + DATAS_timeranges[GlobalOptions.selectedTimerange][1].length + " total stats elements)");
 
     DATAS_statsDatas.baseTimerange = timerange ? timerange : GlobalOptions.selectedTimerange;
 
@@ -184,12 +187,14 @@ function overwriteStats(prefixId) {
         let format = statElement.getAttribute("data-stats-format") || null;
         let result = 0;
 
+        let subMethods = method.split("-");
+
         // Calculs methods
         if (method === "total") {
             DATAS_statsDatas[type].forEach((stats) => {
                 result += stats;
             });
-        } else if (method.split("-")[0] === "average") {
+        } else if (subMethods[0] === "average") {
 
             // Getting the average value for any dataType
             // I hope you like maths...
@@ -244,6 +249,7 @@ function overwriteStats(prefixId) {
         }
 
         let subFormattedResult = [result, result < 0 ? "-" : "+"];
+        let statsTextIndicator = null;
         result = Math.abs(result);
 
         // Format results if needed
@@ -255,7 +261,7 @@ function overwriteStats(prefixId) {
                     result < 60 ? `${result}s` :
                     result < 3600 ? `${Math.round(result/60)}min` :
                     result < 3600 * 399 ? `${Math.round(result/3600)}h` :
-                    `${Math.round(result/3600*24)}j`
+                    `${Math.round(result/3600*24)}j`;
 
             }
         } else {}
@@ -277,12 +283,32 @@ function overwriteStats(prefixId) {
                     subFormattedResult[0] > 1 ? "+" : "-"
                 }</span> ${result}`;
 
+                statsTextIndicator = subFormattedResult[0] > 1 ? "plus" : "moins";
+
             } else if (method.split("-")[1] == "chevron") {
                 // Indicator alternative
             } else if (method.split("-")[1] == "simpleIndicator") {
 
                 result = subFormattedResult[0] == 0 ? "+" : subFormattedResult[0] > 1 ? "+" : "-";
+                statsTextIndicator = subFormattedResult[0] > 1 ? "plus" : "moins";
 
+            }
+        }
+
+        // Check for childrens node to be filled:
+        if (subMethods.includes("text")) {
+            console.log("ok")
+            for (let child of statElement.parentNode.parentNode.children) {
+
+                let dataTypeAttribute = child.getAttribute("data-stats-type");
+
+                if (dataTypeAttribute) {
+
+                    if (dataTypeAttribute == "stats-text-indicator") {
+                        child.innerHTML = child.innerHTML.replace(/{indicator}/g, statsTextIndicator ? statsTextIndicator : "k")
+                    }
+
+                }
             }
         }
 
@@ -290,7 +316,7 @@ function overwriteStats(prefixId) {
         statElement.innerHTML = result;
 
         // Log
-        console.group(`[${ Math.round(((i+1)/statsElementsSize)*100)}%] Processing stats-element #${i}`);
+        console.groupCollapsed(`[${ Math.round(((i+1)/statsElementsSize)*100)}%] Processing stats-element #${i}`);
         console.info({ method: method, type: type, result: result });
         console.groupEnd();
 

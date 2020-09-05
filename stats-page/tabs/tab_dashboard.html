@@ -19,6 +19,7 @@
     </div>
 
     <!-- First general stats (has to be the first child) -->
+    <!-- Note: should process stats on behalf of the container, would need less queries: to consider -->
     <div class="general-stats-box col-lg-3 col-xs-10 d-sm-none">
         <div id="general-stats-box-1" class="flex align-center">
             <div class="flex box-center">
@@ -99,12 +100,12 @@
                 </div>
                 <h4 class="font-family-arial">Messages</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator" data-stats-id="dashboard" data-stats-type="messages">
+                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="messages">
                         <span class="indicator equal">=</span> ...
                     </h3>
                     <h5><i class="fas fa-comment-alt"></i></h5>
                 </div>
-                <h5 class="font-family-arial">De plus qu'en moyenne</h5>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
             </div>
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
@@ -257,12 +258,10 @@
                 </div>
                 <h4 class="font-family-arial">Temps vocal</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator" data-stats-id="dashboard" data-stats-type="voice" data-stats-format="time">
-                        <span class="indicator plus">+</span> 18 999
-                    </h3>
+                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="voice" data-stats-format="time">...</h3>
                     <h5><i class="fas fa-microphone"></i></h5>
                 </div>
-                <h5 class="font-family-arial">De plus qu'en moyenne</h5>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
             </div>
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
