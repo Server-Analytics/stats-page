@@ -1,6 +1,6 @@
 setTimeout(() => {
     addComponent("layout", "statsLayout");
-    components.jquery_layout.load("ajax/displayData/stats/stats-page/stats-page/statsLayout.html");
+    components.jquery_layout.load("ajax/displayData/stats/stats-page/stats-page/statsLayout.php");
 }, 1000);
 
 // Global Options
