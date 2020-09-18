@@ -6,7 +6,11 @@ setTimeout(() => {
 // Global Options
 let GlobalOptions = {
     // Default selecte timerange
-    selectedTimerange: 2
+    selectedTimerange: 2,
+
+    // Premium
+    // Note: changing this value wont do anything :)
+    premium: 0
 }
 
 // You need to call refreshStatsDatas(timerange) in order to access stats datas.
@@ -297,7 +301,6 @@ function overwriteStats(prefixId) {
 
         // Check for childrens node to be filled:
         if (subMethods.includes("text")) {
-            console.log("ok")
             for (let child of statElement.parentNode.parentNode.children) {
 
                 let dataTypeAttribute = child.getAttribute("data-stats-type");
@@ -324,6 +327,28 @@ function overwriteStats(prefixId) {
         if ((i + 1) >= statsElementsSize) console.groupEnd();
 
     });
+
+    // Edit timetamp modal
+    let timestampModal = $(`#${prefixId}_timespampModal`);
+
+    if (timestampModal) {
+
+        let timestampModalContent = "";
+        DATAS_timeranges.forEach((timerange, i) => {
+            timestampModalContent +=
+                `<div class="modal-selector
+            ${GlobalOptions.selectedTimerange == i ? "active" :
+            timerange[3] == 1 ? GlobalOptions.premium == true ? "premium" : "premium-locked" : ""}">
+                <i class="
+            ${GlobalOptions.selectedTimerange == i ? "fas fa-clock" :
+            timerange[3] == 1 ? "fas fa-star" : "far fa-clock"}
+                fontawesome-icon"></i> ${timerange[2]}</div>`;
+
+            if (i + 1 == DATAS_timeranges.length)
+                return timestampModal.html(timestampModalContent);
+        });
+
+    }
 
 }
 

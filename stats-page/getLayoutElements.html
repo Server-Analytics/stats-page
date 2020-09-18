@@ -6,10 +6,14 @@
     // [timestamp in ms, [], name, bool: locked for premium]
     let DATAS_timeranges = [
         [86400000, [], "Ces dernières 24 heures", 0],
-        [86400000 * 2, [], "Ces dernières 48 heures", 0],
-        [86400000 * 7, [], "Ces derniers 7 jours", 0],
-        [86400000 * 28, [], "Ces derniers 28 jours", 0],
+        [86400000 * 2, [], "Ces 48 dernières heures", 0],
+        [86400000 * 7, [], "Ces 7 derniers jours", 0],
+        [86400000 * 28, [], "Ces 28 derniers jours", 0],
         [2592000000, [], "Ces derniers 31 jours", 0],
+        [2592000000 * 3, [], "Ces 3 derniers mois", 1],
+        [2592000000 * 12, [], "Cette dernière année", 1],
+        [+new Date(), [], "Depuis toujours", 1],
+
     ];
 
     // Global stats

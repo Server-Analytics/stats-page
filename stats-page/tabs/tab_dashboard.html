@@ -311,10 +311,21 @@
 <div id="timerangeModal" class="modal-element-container">
     <div class="flex line-center">
         <div class="modal-element col-lg-5 col-sm-10 col-xs-11 hide-scrollbar">
-            <div class="modal-element-header ">
-                <h4 class="title">Plage de données</h4>
+            <div class="modal-element-header flex align-center btw">
+                <div>
+                    <h4 class="title">Plage de données</h4>
+                </div>
+                <div>
+                    <h3 class="cancel-button" onclick="closeModal('timerangeModal');">&times;</h3>
+                </div>
             </div>
-
+            <div class="modal-element-body" id="dashboard_timespampModal">
+                <div class="modal-selector"><i class="far fa-clock fontawesome-icon"></i> Ces 7 derniers jours</div>
+                <div class="modal-selector active"><i class="fas fa-clock fontawesome-icon"></i> Ces 7 derniers jours</div>
+                <div class="modal-selector"><i class="far fa-clock fontawesome-icon"></i> Ces 7 derniers jours</div>
+                <div class="modal-selector premium"><i class="fas fa-star fontawesome-icon"></i> Ces 7 derniers jours</div>
+                <div class="modal-selector premium-locked"><i class="fas fa-star fontawesome-icon"></i> Ces 7 derniers jours</div>
+            </div>
         </div>
     </div>
 </div>
