@@ -5,12 +5,10 @@ setTimeout(() => {
 
 // Global Options
 let GlobalOptions = {
-    // Default selecte timerange
-    selectedTimerange: 2,
 
-    // Premium
-    // Note: changing this value wont do anything :)
-    premium: 0,
+    selectedTimerange: 2, // Default selected timerange
+    premium: 0, // Note: changing this value wont do anything :)
+
     lastSelectedPrefix: null
 }
 
@@ -21,12 +19,14 @@ let DATAS_statsDatas = {}
 refreshStatsDatas(GlobalOptions.selectedTimerange)
 
 
-// StatsTabs to keep loaded during navigation
+/* StatsTabs list
+(set preload to true to keep the tab loaded in order to make the navigation faster) */
+
 let preloadedStatsTabs = {
-    "statTab1": "tab_dashboard.html",
-    "statTab2": "tab_my_stats.html",
-    "statTab3": "tab_messages.html",
-    "statTab4": "tab_members.html"
+    "statTab1": { url: "tab_dashboard.html", preload: true },
+    "statTab2": { url: "tab_my_stats.html", preload: true },
+    "statTab3": { url: "tab_messages.html", preload: true },
+    "statTab4": { url: "tab_members.html", preload: true }
 }
 
 // When fully loaded, hide the global-container then reveal the stats layout
@@ -39,7 +39,7 @@ function statLayoutLoaded() {
 
         let statTabContainer = $(`#${statTab}`);
 
-        statTabContainer.load(`ajax/displayData/stats/stats-page/stats-page/tabs/${preloadedStatsTabs[statTab]}`);
+        statTabContainer.load(`ajax/displayData/stats/stats-page/stats-page/tabs/${preloadedStatsTabs[statTab].url}`);
 
         console.log(`[${Math.round(((i+1)/Object.keys(preloadedStatsTabs).length)*100)}%] Pre-Loaded #${statTab} tab`);
         if (i + 1 >= Object.keys(preloadedStatsTabs).length) console.groupEnd();
@@ -429,7 +429,10 @@ function updateTimerange(timerangeID, isModal) {
 
     // Updating stats
     refreshStatsDatas(timerangeID);
-    overwriteStats(GlobalOptions.lastSelectedPrefix);
+
+    // Reload the tab
+    if (loadedTab)
+        $(`#${loadedTab.id}`).load(`ajax/displayData/stats/stats-page/stats-page/tabs/${preloadedStatsTabs[loadedTab.id].url}`);
 
 }
 
