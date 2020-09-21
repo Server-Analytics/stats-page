@@ -10,7 +10,8 @@ let GlobalOptions = {
 
     // Premium
     // Note: changing this value wont do anything :)
-    premium: 0
+    premium: 0,
+    lastSelectedPrefix: null
 }
 
 // You need to call refreshStatsDatas(timerange) in order to access stats datas.
@@ -124,7 +125,7 @@ function loadStatTab(tabId, loadUrl) {
 
             loadedTab = components[tabId];
 
-        }, 600)
+        }, 500)
     }
 
     if (components.sideNav.style.left == "0%") components.jquery_sideNav.animate({ "left": "-100%" }, 500);
@@ -134,7 +135,7 @@ function loadStatTab(tabId, loadUrl) {
 // Refresh stats datas
 function refreshStatsDatas(timerange) {
 
-    if (!timerange)
+    if (timerange == null)
         timerange = GlobalOptions.selectedTimerange;
 
     if (!DATAS_timeranges[timerange]) return console.warn("Warning » Couldn't refresh datas. Timerange id specified doesn't exist.")
@@ -336,7 +337,7 @@ function overwriteStats(prefixId) {
         let timestampModalContent = "";
         DATAS_timeranges.forEach((timerange, i) => {
             timestampModalContent +=
-                `<div class="modal-selector
+                `<div onclick="updateTimerange(${i}, true)" class="modal-selector
             ${GlobalOptions.selectedTimerange == i ? "active" :
             timerange[3] == 1 ? GlobalOptions.premium == true ? "premium" : "premium-locked" : ""}">
                 <i class="
@@ -349,6 +350,9 @@ function overwriteStats(prefixId) {
         });
 
     }
+
+    // Set the actual
+    GlobalOptions.lastSelectedPrefix = prefixId;
 
 }
 
@@ -411,6 +415,22 @@ function drawChart(canvasId, options) {
             }
         }
     });
+}
+
+// Change timerange
+function updateTimerange(timerangeID, isModal) {
+
+    // Closing modal
+    if (isModal || isModal == true) {
+        let = timerangeModalElement = $(`#${GlobalOptions.lastSelectedPrefix}_timerangeModal`);
+        if (timerangeModalElement)
+            closeModal(`${GlobalOptions.lastSelectedPrefix}_timerangeModal`);
+    }
+
+    // Updating stats
+    refreshStatsDatas(timerangeID);
+    overwriteStats(GlobalOptions.lastSelectedPrefix);
+
 }
 
 // Draw pie chart
