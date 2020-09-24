@@ -22,6 +22,7 @@
             messages: 151456
         },
         infos: {
+            statsAccuracyDivider: 1,
             botJoinTime: 1595808000000
         }
     }
@@ -31,29 +32,29 @@
 
     let DATAS_statsDataRange = [
         [{
-            date: actualDate,
-            readableDate: formatTime(actualDate, 0, "FR"),
+            date: (actualDate * DATAS_globalStats.infos.statsAccuracyDivider),
+            readableDate: formatTime((actualDate * DATAS_globalStats.infos.statsAccuracyDivider), 0, "FR"),
             messages: 6,
             voice: 5874,
             members: 451
         }],
         [{
-            date: actualDate - 46400000 * 2,
-            readableDate: formatTime(actualDate - (46400000 * 2), 0, "FR"),
+            date: (actualDate * DATAS_globalStats.infos.statsAccuracyDivider) - 46400000 * 2,
+            readableDate: formatTime((actualDate * DATAS_globalStats.infos.statsAccuracyDivider) - (46400000 * 2), 0, "FR"),
             messages: 31,
             voice: 10547,
             members: 445
         }],
         [{
-            date: actualDate - (46400000 * 10),
+            date: (actualDate * DATAS_globalStats.infos.statsAccuracyDivider) - (46400000 * 10),
             messages: 11,
-            readableDate: formatTime(actualDate - (46400000 * 10), 0, "FR"),
+            readableDate: formatTime((actualDate * DATAS_globalStats.infos.statsAccuracyDivider) - (46400000 * 10), 0, "FR"),
             voice: 387,
             members: 456
         }],
         [{
-            date: actualDate - (46400000 * 6),
-            readableDate: formatTime(actualDate - (46400000 * 6), 0, "FR"),
+            date: (actualDate * DATAS_globalStats.infos.statsAccuracyDivider) - (46400000 * 6),
+            readableDate: formatTime((actualDate * DATAS_globalStats.infos.statsAccuracyDivider) - (46400000 * 6), 0, "FR"),
             messages: 46,
             voice: 1254,
             members: 471

@@ -124,6 +124,28 @@ include("../../../../../../src/php/include/head.php");
 
     </div>
 
+    <!-- Global Modals -->
+    <div id="coming_soon_modal" class="modal-element-container">
+        <div class="flex line-center">
+            <div class="modal-element col-lg-5 col-sm-10 col-xs-11 hide-scrollbar">
+                <div class="modal-element-header flex align-center btw">
+                    <div>
+                        <h4 class="title">En developpement-</h4>
+                    </div>
+                    <div>
+                        <h3 class="cancel-button" onclick="closeModal('coming_soon_modal');">&times;</h3>
+                    </div>
+                </div>
+                <div class="modal-element-body flex box-center">
+                    <h1>v2.1</h1>
+                    <h3>Plein de nouveautés arrivent <i class="fas fa-calendar-plus"></i></h3>
+                    <div class="statsButton blue">Supporter le développement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         statLayoutLoaded();
     </script>
