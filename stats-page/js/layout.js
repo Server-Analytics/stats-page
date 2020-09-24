@@ -47,8 +47,16 @@ function statLayoutLoaded() {
     });
 }
 
+
+var firstStatTabAlreadyLoaded = false;
+
 // Once the first statTab is loaded, remove globalContainer
 function firstStatTabLoaded() {
+
+    if (firstStatTabAlreadyLoaded == true)
+        return;
+
+    firstStatTabAlreadyLoaded = true;
 
     console.log("Layout fully loaded, removing globalContainer's classes")
 
@@ -351,6 +359,10 @@ function overwriteStats(prefixId) {
 
     }
 
+    let timestampIndicatorButton = $(`#${prefixId}_timerangeIndicatorButton`);
+    if (timestampIndicatorButton)
+        timestampIndicatorButton.html(DATAS_timeranges[GlobalOptions.selectedTimerange][2]);
+
     // Set the actual
     GlobalOptions.lastSelectedPrefix = prefixId;
 
@@ -359,9 +371,24 @@ function overwriteStats(prefixId) {
 // Draw line chart
 function drawChart(canvasId, options) {
 
+    // Get options
     if (!options) options = {};
     if (!options.settings) options.settings = {};
 
+    // If we have less than 3 labels in each datasets, create empty labels
+    if (options.datasets.labels.length <= 3)
+        options.datasets.labels.unshift("Aucune données", "Aucune données", "Aucune données");
+
+    // Checking datasets lenght, adding elements if needed
+    options.datasets.datasets.forEach(dataset => {
+        if (dataset.data.length < options.datasets.labels.length) {
+            while (dataset.data.length + 1 <= options.datasets.labels.length) {
+                dataset.data.unshift(0);
+            }
+        }
+    })
+
+    // Draw Chart
     let ctx = document.getElementById(canvasId).getContext('2d');
     let chartjs = new Chart(ctx, {
         type: 'line',
