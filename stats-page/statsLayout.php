@@ -136,10 +136,14 @@ include("../../../../../../src/php/include/head.php");
                         <h3 class="cancel-button" onclick="closeModal('coming_soon_modal');">&times;</h3>
                     </div>
                 </div>
-                <div class="modal-element-body flex box-center">
-                    <h1>v2.1</h1>
-                    <h3>Plein de nouveautés arrivent <i class="fas fa-calendar-plus"></i></h3>
-                    <div class="statsButton blue">Supporter le développement</div>
+                <div class="modal-element-body flex box-center center wrap modal-text-layout">
+                    <div class="text-center w-100p">
+                        <h1>Ca arrive !</h1>
+                        <h3>Plein de nouveautés se préparent <i class="fas fa-calendar-plus"></i></h3>
+                    </div>
+                    <div class="flex center w-100p">
+                        <div class="statsButton blue">Supporter le développement</div>
+                    </div>
                 </div>
             </div>
         </div>
