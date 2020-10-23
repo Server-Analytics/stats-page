@@ -303,6 +303,7 @@ function overwriteStats(prefixId) {
             } else if (method.split("-")[1] == "simpleIndicator") {
 
                 result = subFormattedResult[0] == 0 ? "+" : subFormattedResult[0] > 1 ? "+" : "-";
+                result += subFormattedResult[0];
                 statsTextIndicator = subFormattedResult[0] > 1 ? "plus" : "moins";
 
             }
@@ -374,19 +375,62 @@ function drawChart(canvasId, options) {
     // Get options
     if (!options) options = {};
     if (!options.settings) options.settings = {};
+    let chartLabels = options.datasets.labels;
+    let dataGroupsPerGraph = 40;
 
     // If we have less than 3 labels in each datasets, create empty labels
-    if (options.datasets.labels.length <= 3)
-        options.datasets.labels.unshift("Aucune données", "Aucune données", "Aucune données");
+    if (chartLabels.length <= 3)
+        chartLabels.unshift("Aucune données", "Aucune données", "Aucune données");
+
+    // Minimal group size depending on labels number (In MS)
+    let statsGroupSize = options.externalDatas.timestamps ?
+        (options.externalDatas.timestamps[0] - options.externalDatas.timestamps[
+            options.externalDatas.timestamps.length - 1
+        ]) / dataGroupsPerGraph : 0;
+
+    console.log(`Min. group size: ${statsGroupSize}`);
 
     // Checking datasets lenght, adding elements if needed
     options.datasets.datasets.forEach(dataset => {
-        if (dataset.data.length < options.datasets.labels.length) {
-            while (dataset.data.length + 1 <= options.datasets.labels.length) {
+        if (dataset.data.length < chartLabels.length) {
+            while (dataset.data.length + 1 <= chartLabels.length) {
                 dataset.data.unshift(0);
             }
         }
-    })
+
+        if (options.externalDatas && options.externalDatas.timestamps) {
+
+            let datasetGrouppedDatas = [];
+            dataset.data.forEach((data, i) => {
+                datasetGrouppedDatas.push([data, Math.floor(
+                    options.externalDatas.timestamps[i] / statsGroupSize)]);
+            });
+
+            datasetGrouppedDatas = groupBy(datasetGrouppedDatas, [1]);
+            dataset.data.length = 0;
+            chartLabels.length = 0;
+
+            Object.keys(datasetGrouppedDatas).forEach((chartDataKey) => {
+                i++;
+                let dataGroupValue = 0;
+                let dataGroupLabel = 0;
+
+                datasetGrouppedDatas[chartDataKey]
+                    .forEach((chartDataRow) => {
+                        if (options.externalDatas.processMethod == "sum") {
+                            dataGroupValue += chartDataRow[0];
+                        } else if (options.externalDatas.processMethod == "set") {
+                            dataGroupValue = chartDataRow[0];
+                        }
+                        dataGroupLabel = chartDataRow[1];
+                    })
+
+                dataset.data.push(dataGroupValue)
+                chartLabels.push(formatTime(dataGroupLabel * statsGroupSize))
+
+            });
+        }
+    });
 
     // Draw Chart
     let ctx = document.getElementById(canvasId).getContext('2d');
@@ -400,7 +444,9 @@ function drawChart(canvasId, options) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: options.options ? options.options.beginAtZero != null ? options.options.beginAtZero : true : true
+                        beginAtZero: options.options ?
+                            options.options.beginAtZero != null ?
+                            options.options.beginAtZero : true : true
                     },
                     display: deviceScreenSize == "sm" ? false : true
                 }],
@@ -417,7 +463,7 @@ function drawChart(canvasId, options) {
                         var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
                         if (label) {
-                            label += options.settings.tooltip ? options.settings.tooltip.label ? options.settings.tooltip.label.replace(/{label}/g, tooltipItem.yLabel) : `: ${tooltipItem.yLabel}` : `: ${tooltipItem.yLabel}`;
+                            label += options.settings.tooltip ? options.settings.tooltip.label ? options.settings.tooltip.label.replace(/{label}/g, tooltipItem.yLabel) : `: ${ tooltipItem.yLabel }` : `: ${ tooltipItem.yLabel }`;
                         }
 
                         if (options.settings.tooltip && options.settings.tooltip.formula) {
@@ -427,10 +473,10 @@ function drawChart(canvasId, options) {
                             if (options.settings.tooltip.formula == "time") {
 
                                 label += options.settings.tooltip.label.replace(/{label}/g,
-                                    tooltipItem.yLabel < 60 ? `${tooltipItem.yLabel}s` :
-                                    tooltipItem.yLabel < 3600 * 2 ? `${Math.round(tooltipItem.yLabel/60)} mins` :
-                                    tooltipItem.yLabel < 3600 * 24 ? `${Math.round(tooltipItem.yLabel/3600)}h` :
-                                    `${Math.round(tooltipItem.yLabel/3600)}j`
+                                    tooltipItem.yLabel < 60 ? `${ tooltipItem.yLabel }s ` :
+                                    tooltipItem.yLabel < 3600 * 2 ? `${ Math.round(tooltipItem.yLabel / 60) }mins ` :
+                                    tooltipItem.yLabel < 3600 * 24 ? `${ Math.round(tooltipItem.yLabel / 3600) }h ` :
+                                    `${ Math.round(tooltipItem.yLabel / 3600) }j `
                                 );
 
                             }
@@ -449,7 +495,7 @@ function updateTimerange(timerangeID, isModal) {
 
     // Closing modal
     if (isModal || isModal == true) {
-        let = timerangeModalElement = $(`#${GlobalOptions.lastSelectedPrefix}_timerangeModal`);
+        let = timerangeModalElement = $(`#${ GlobalOptions.lastSelectedPrefix }_timerangeModal`);
         if (timerangeModalElement)
             closeModal(`${GlobalOptions.lastSelectedPrefix}_timerangeModal`);
     }
@@ -459,7 +505,7 @@ function updateTimerange(timerangeID, isModal) {
 
     // Reload the tab
     if (loadedTab)
-        $(`#${loadedTab.id}`).load(`ajax/displayData/stats/stats-page/stats-page/tabs/${preloadedStatsTabs[loadedTab.id].url}`);
+        $(`#${ loadedTab.id }`).load(`ajax/displayData/stats/stats-page/stats-page/tabs/${preloadedStatsTabs[loadedTab.id].url}`);
 
 }
 
@@ -480,3 +526,10 @@ function drawPieChart(canvasId, options) {
         }
     });
 }
+
+function groupBy(xs, key) {
+    return xs.reduce(function(rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+    }, {});
+};

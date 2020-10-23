@@ -103,6 +103,10 @@
                                 borderColor: '#4a64b8',
                                 borderWidth: 1
                             }]
+                        },
+                        "externalDatas": {
+                            timestamps: DATAS_statsDatas.date,
+                            processMethod: "sum"
                         }
                     });
                 </script>
@@ -206,6 +210,10 @@
                         },
                         options: {
                             beginAtZero: false
+                        },
+                        "externalDatas": {
+                            timestamps: DATAS_statsDatas.date,
+                            processMethod: "set"
                         }
                     });
                 </script>
@@ -261,6 +269,10 @@
                                 label: ": {label}",
                                 formula: "time"
                             }
+                        },
+                        "externalDatas": {
+                            timestamps: DATAS_statsDatas.date,
+                            processMethod: "sum"
                         }
                     });
                 </script>
