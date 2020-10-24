@@ -51,7 +51,7 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
                 date: (<?php echo $statsReport['date']; ?> * DATAS_globalStats.infos.statsAccuracyDivider),
                 readableDate: formatTime((<?php echo $statsReport['date']; ?> * DATAS_globalStats.infos.statsAccuracyDivider), 0, "FR"),
                 messages: <?php echo $statsReport['messages']; ?>,
-                voice: <?php echo $statsReport['voice_time']; ?>,
+                voice: <?php echo $statsReport['voice_time']; ?> / 1000,
                 members: <?php echo $statsReport['membres']; ?>
             }],
 

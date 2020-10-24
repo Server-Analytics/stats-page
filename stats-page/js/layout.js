@@ -476,7 +476,7 @@ function drawChart(canvasId, options) {
                                     tooltipItem.yLabel < 60 ? `${ tooltipItem.yLabel }s ` :
                                     tooltipItem.yLabel < 3600 * 2 ? `${ Math.round(tooltipItem.yLabel / 60) }mins ` :
                                     tooltipItem.yLabel < 3600 * 24 ? `${ Math.round(tooltipItem.yLabel / 3600) }h ` :
-                                    `${ Math.round(tooltipItem.yLabel / 3600) }j `
+                                    `${ Math.round(1+tooltipItem.yLabel / (3600*24)) }j `
                                 );
 
                             }
