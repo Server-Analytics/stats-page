@@ -220,108 +220,113 @@
             </div>
             <div class="stats-info col-lg-3 d-sm-none">
                 <div class="flex align-center primary-stats">
-                    <h1 class="font-family-arial">99 999</h1>
+                    <h1 class="font-family-arial" data-stats-id="dashboard" data-stats-method="set" data-stats-type="members">...</h1>
                 </div>
-                <h4 class="font-family-arial">Messages</h4>
+                <h4 class="font-family-arial">Membres</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial">
-                        <span class="indicator plus">+</span> 18 999
+                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="members">
+                        <span class="indicator equal">=</span> ...
                     </h3>
                     <h5><i class="fas fa-comment-alt"></i></h5>
-                </div>
-                <h5 class="font-family-arial">De plus qu'en moyenne</h5>
-            </div>
-            <div class="stats-info-mobile d-lg-none col-xs-12 flex">
-                <div class="primary-stats">
-                    <h3 class="no-break font-family-arial">99 999</h3>
-                    <h5 class="font-family-arial">Messages</h5>
-                </div>
-                <div class="separator"></div>
-                <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial">+ 18 999</h3>
-                    <h5 class="font-family-arial">De plus qu'en moyenne</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Thrid stats line -->
-    <div class="w-100p flex mobile-wrap">
-        <!-- Large: voice line graph -->
-        <div class="stats-box large col-lg-8 col-xs-12">
-            <div class="col-lg-9 col-xs-12">
-
-                <canvas id="chartDashboardVoice" width="100%"></canvas>
-                <script>
-                    drawChart("chartDashboardVoice", {
-                        "datasets": {
-                            labels: DATAS_statsDatas.readableDate,
-                            datasets: [{
-                                label: 'Temps en vocal',
-                                data: DATAS_statsDatas.voice,
-                                backgroundColor: 'rgba(114,137,218,0.4)',
-                                borderColor: '#4a64b8',
-                                borderWidth: 1
-                            }],
-                        },
-                        "settings": {
-                            tooltip: {
-                                label: ": {label}",
-                                formula: "time"
-                            }
-                        },
-                        "externalDatas": {
-                            timestamps: DATAS_statsDatas.date,
-                            processMethod: "sum"
-                        }
-                    });
-                </script>
-            </div>
-            <div class="stats-info col-lg-3 d-sm-none">
-                <div class="flex align-center primary-stats">
-                    <h1 class="font-family-arial" data-stats-id="dashboard" data-stats-method="total" data-stats-format="time" data-stats-type="voice">...</h1>
-                </div>
-                <h4 class="font-family-arial">Temps vocal</h4>
-                <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="voice" data-stats-format="time">...</h3>
-                    <h5><i class="fas fa-microphone"></i></h5>
                 </div>
                 <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
             </div>
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
-                    <h3 class="no-break font-family-arial">99 999</h3>
-                    <h5 class="font-family-arial">Messages</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="set" data-stats-type="members">...</h3>
+                    <h5 class="font-family-arial">Membres</h5>
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial">+ 18 999</h3>
-                    <h5 class="font-family-arial">De plus qu'en moyenne</h5>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stats #2 - Mentions/Pings -->
-        <div class="stats-box right small col-lg-4 col-xs-12 flex box-center">
-            <div class="head d-sm-none">
-                <h4><i class="fas fa-at"></i> Mentions / Pings</h4>
-            </div>
-            <div class="body">
-                <div class="flex wrap center">
-                    <div class="flex text align-center d-sm-none">
-                        <h1>75 621</h1>
-                        <h2><i class="fas fa-at"></i></h2>
-                    </div>
-                    <div class="flex mobile-text d-lg-none align-center">
-                        <h2>75 621</h2>
-                        <h4><i class="fas fa-at"></i></h4>
-                    </div>
-                    <h4>Mentions envoyées</h4>
-                    <h5 class="moyenne"><i class="fas fa-chevron-up"></i> <strong>16</strong> de plus qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="average-simpleIndicator" data-stats-type="members">...</h3>
+                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Thrid stats line -->
+<div class="w-100p flex mobile-wrap">
+    <!-- Large: voice line graph -->
+    <div class="stats-box large col-lg-8 col-xs-12">
+        <div class="col-lg-9 col-xs-12">
+
+            <canvas id="chartDashboardVoice" width="100%"></canvas>
+            <script>
+                drawChart("chartDashboardVoice", {
+                    "datasets": {
+                        labels: DATAS_statsDatas.readableDate,
+                        datasets: [{
+                            label: 'Temps en vocal',
+                            data: DATAS_statsDatas.voice,
+                            backgroundColor: 'rgba(114,137,218,0.4)',
+                            borderColor: '#4a64b8',
+                            borderWidth: 1
+                        }],
+                    },
+                    "settings": {
+                        tooltip: {
+                            label: ": {label}",
+                            formula: "time"
+                        },
+                        yAxis: {
+                            label: ": {label}",
+                            formula: "time"
+                        }
+                    },
+                    "externalDatas": {
+                        timestamps: DATAS_statsDatas.date,
+                        processMethod: "sum"
+                    }
+                });
+            </script>
+        </div>
+        <div class="stats-info col-lg-3 d-sm-none">
+            <div class="flex align-center primary-stats">
+                <h1 class="font-family-arial" data-stats-id="dashboard" data-stats-method="total" data-stats-format="time" data-stats-type="voice">...</h1>
+            </div>
+            <h4 class="font-family-arial">Temps vocal</h4>
+            <div class="flex align-center secondary-stats">
+                <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="voice" data-stats-format="time">...</h3>
+                <h5><i class="fas fa-microphone"></i></h5>
+            </div>
+            <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
+        </div>
+        <div class="stats-info-mobile d-lg-none col-xs-12 flex">
+            <div class="primary-stats">
+                <h3 class="no-break font-family-arial">99 999</h3>
+                <h5 class="font-family-arial">Messages</h5>
+            </div>
+            <div class="separator"></div>
+            <div class="secondary-stats">
+                <h3 class="no-break font-family-arial">+ 18 999</h3>
+                <h5 class="font-family-arial">De plus qu'en moyenne</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats #2 - Mentions/Pings -->
+    <div class="stats-box right small col-lg-4 col-xs-12 flex box-center">
+        <div class="head d-sm-none">
+            <h4><i class="fas fa-at"></i> Mentions / Pings</h4>
+        </div>
+        <div class="body">
+            <div class="flex wrap center">
+                <div class="flex text align-center d-sm-none">
+                    <h1>75 621</h1>
+                    <h2><i class="fas fa-at"></i></h2>
+                </div>
+                <div class="flex mobile-text d-lg-none align-center">
+                    <h2>75 621</h2>
+                    <h4><i class="fas fa-at"></i></h4>
+                </div>
+                <h4>Mentions envoyées</h4>
+                <h5 class="moyenne"><i class="fas fa-chevron-up"></i> <strong>16</strong> de plus qu'en moyenne</h5>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- Modals -->

@@ -207,6 +207,10 @@ function overwriteStats(prefixId) {
             DATAS_statsDatas[type].forEach((stats) => {
                 result += stats;
             });
+        } else if (method === "set") {
+
+            result = DATAS_statsDatas[type][DATAS_statsDatas[type].length - 1];
+
         } else if (subMethods[0] === "average") {
 
             // Getting the average value for any dataType
@@ -270,11 +274,7 @@ function overwriteStats(prefixId) {
         if (format) {
             if (format == "time") {
 
-                result =
-                    result < 60 ? `${result}s` :
-                    result < 3600 ? `${Math.round(result/60)}min` :
-                    result < 3600 * 399 ? `${Math.round(result/3600)}h` :
-                    `${Math.round(result/3600*24)}j`;
+                result = toTimeFormat(result);
 
             }
         } else {}
@@ -446,7 +446,14 @@ function drawChart(canvasId, options) {
                     ticks: {
                         beginAtZero: options.options ?
                             options.options.beginAtZero != null ?
-                            options.options.beginAtZero : true : true
+                            options.options.beginAtZero : true : true,
+
+                        callback: function(label) {
+                            return options.settings.tooltip ?
+                                options.settings.tooltip.formula ?
+                                options.settings.tooltip.formula == "time" ? toTimeFormat(label) :
+                                label : label : label;
+                        }
                     },
                     display: deviceScreenSize == "sm" ? false : true
                 }],
@@ -473,10 +480,7 @@ function drawChart(canvasId, options) {
                             if (options.settings.tooltip.formula == "time") {
 
                                 label += options.settings.tooltip.label.replace(/{label}/g,
-                                    tooltipItem.yLabel < 60 ? `${ tooltipItem.yLabel }s ` :
-                                    tooltipItem.yLabel < 3600 * 2 ? `${ Math.round(tooltipItem.yLabel / 60) }mins ` :
-                                    tooltipItem.yLabel < 3600 * 24 ? `${ Math.round(tooltipItem.yLabel / 3600) }h ` :
-                                    `${ Math.round(1+tooltipItem.yLabel / (3600*24)) }j `
+                                    toTimeFormat(tooltipItem.yLabel)
                                 );
 
                             }
@@ -533,3 +537,10 @@ function groupBy(xs, key) {
         return rv;
     }, {});
 };
+
+function toTimeFormat(timeInSeconds) {
+    return timeInSeconds < 60 ? `${timeInSeconds}s` :
+        timeInSeconds < 3600 ? `${Math.round(timeInSeconds/60)}min` :
+        timeInSeconds < 3600 * 399 ? `${Math.round(timeInSeconds/3600)}h` :
+        `${Math.round(timeInSeconds/3600*24)}j`;
+}
