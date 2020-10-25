@@ -260,10 +260,19 @@ function overwriteStats(prefixId) {
                             console.warn(`Warning » Cannot get globalStats.total of "${type}".`)
                     }
                 }
-            } else {
+            } else
                 result = 0;
-            }
+
+        } else if (subMethods[0] === "comparison") {
+
+            result = DATAS_statsDatas[type][DATAS_statsDatas[type].length - 1] -
+                DATAS_statsDatas[type][0];
+
+        } else {
+            console.warn(`Cannot find any "${subMethods[0]}" method.`)
+            result = 0;
         }
+
 
         let subFormattedResult = [result, result < 0 ? "-" : "+"];
         let statsTextIndicator = null;
@@ -290,21 +299,21 @@ function overwriteStats(prefixId) {
 
                 result = `<span class="indicator ${
                     subFormattedResult[0] == 0 ? "equal" :
-                    subFormattedResult[0] > 1 ? "plus" : "minus"
+                    subFormattedResult[0] > 0 ? "plus" : "minus"
                 }">${
                     subFormattedResult[0] == 0 ? "=" :
-                    subFormattedResult[0] > 1 ? "+" : "-"
+                    subFormattedResult[0] > 0 ? "+" : "-"
                 }</span> ${result}`;
 
-                statsTextIndicator = subFormattedResult[0] > 1 ? "plus" : "moins";
+                statsTextIndicator = subFormattedResult[0] > 0 ? "plus" : "moins";
 
             } else if (method.split("-")[1] == "chevron") {
                 // Indicator alternative
             } else if (method.split("-")[1] == "simpleIndicator") {
 
-                result = subFormattedResult[0] == 0 ? "+" : subFormattedResult[0] > 1 ? "+" : "-";
+                result = subFormattedResult[0] == 0 ? "+" : subFormattedResult[0] > 0 ? "+" : "-";
                 result += subFormattedResult[0];
-                statsTextIndicator = subFormattedResult[0] > 1 ? "plus" : "moins";
+                statsTextIndicator = subFormattedResult[0] > 0 ? "plus" : "moins";
 
             }
         }
@@ -387,8 +396,6 @@ function drawChart(canvasId, options) {
         (options.externalDatas.timestamps[0] - options.externalDatas.timestamps[
             options.externalDatas.timestamps.length - 1
         ]) / dataGroupsPerGraph : 0;
-
-    console.log(`Min. group size: ${statsGroupSize}`);
 
     // Checking datasets lenght, adding elements if needed
     options.datasets.datasets.forEach(dataset => {
