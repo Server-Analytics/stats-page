@@ -174,7 +174,6 @@ function refreshStatsDatas(timerange) {
         });
 }
 
-
 // Fetch all stats elements and overwrite them
 function overwriteStats(prefixId) {
 
@@ -308,7 +307,15 @@ function overwriteStats(prefixId) {
                 statsTextIndicator = subFormattedResult[0] > 0 ? "plus" : "moins";
 
             } else if (method.split("-")[1] == "chevron") {
-                // Indicator alternative
+
+                result = subFormattedResult[0] == 0 ? '<i class="fas fa-chevron-up"></i> ' :
+                    subFormattedResult[0] > 0 ? '<i class="fas fa-chevron-up"></i> ' :
+                    '<i class="fas fa-chevron-down"></i> ';
+                result += subFormattedResult[0];
+                result += ` de ${subFormattedResult[0] > 0 ? "plus" : "moins"} qu'en moyenne`
+
+                statsTextIndicator = subFormattedResult[0] > 0 ? "plus" : "moins";
+
             } else if (method.split("-")[1] == "simpleIndicator") {
 
                 result = subFormattedResult[0] == 0 ? "+" : subFormattedResult[0] > 0 ? "+" : "-";
