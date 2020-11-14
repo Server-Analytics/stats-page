@@ -40,7 +40,9 @@
             </div>
             <div class="text">
                 <h4>Messages</h4>
-                <h5><i class="fas fa-comments"></i> <span data-stats-id="dashboard" data-stats-type="messages" data-stats-method="global">15 541 148</span></h5>
+                <h5><i class="fas fa-comments"></i>
+                    <span data-stats-id="dashboard" data-stats-type="messages" data-stats-method="global" data-stats-format="reduce">...</span>
+                </h5>
             </div>
         </div>
     </div>
@@ -65,7 +67,9 @@
             </div>
             <div class="text">
                 <h4>Temps vocal</h4>
-                <h5><i class="fas fa-history"></i> 15j 15h 12s</h5>
+                <h5><i class="fas fa-history"></i>
+                    <span data-stats-id="dashboard" data-stats-type="voice_time" data-stats-method="global" data-stats-format="time">15j 15h 12s</span>
+                </h5>
             </div>
         </div>
     </div>
@@ -252,7 +256,7 @@
 
 <!-- Thrid stats line -->
 <div class="w-100p flex mobile-wrap">
-    <!-- Large: voice line graph -->
+    <!-- Large: voice_time line graph -->
     <div class="stats-box large col-lg-8 col-xs-12">
         <div class="col-lg-9 col-xs-12">
 
@@ -263,7 +267,7 @@
                         labels: DATAS_statsDatas.readableDate,
                         datasets: [{
                             label: 'Temps en vocal',
-                            data: DATAS_statsDatas.voice,
+                            data: DATAS_statsDatas.voice_time,
                             backgroundColor: 'rgba(114,137,218,0.4)',
                             borderColor: '#4a64b8',
                             borderWidth: 1
@@ -288,11 +292,11 @@
         </div>
         <div class="stats-info col-lg-3 d-sm-none">
             <div class="flex align-center primary-stats">
-                <h1 class="font-family-arial" data-stats-id="dashboard" data-stats-method="total" data-stats-format="time" data-stats-type="voice">...</h1>
+                <h1 class="font-family-arial" data-stats-id="dashboard" data-stats-method="total" data-stats-format="time" data-stats-type="voice_time">...</h1>
             </div>
             <h4 class="font-family-arial">Temps vocal</h4>
             <div class="flex align-center secondary-stats">
-                <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="voice" data-stats-format="time">...</h3>
+                <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="voice_time" data-stats-format="time">...</h3>
                 <h5><i class="fas fa-microphone"></i></h5>
             </div>
             <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>

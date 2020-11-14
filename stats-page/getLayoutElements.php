@@ -28,7 +28,9 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
         // Global stats
         let DATAS_globalStats = {
             total: {
-                messages: <?php echo $guildInfos['messages']; ?>
+                messages: <?php echo $guildInfos['messages']; ?>,
+                voice_time: <?php echo $guildInfos['voice_time'] / 1000; ?>,
+                type_time: <?php echo $guildInfos['type_time'] / 1000; ?>,
             },
             infos: {
                 statsAccuracyDivider: 7200000,
@@ -51,7 +53,7 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
                 date: (<?php echo $statsReport['date']; ?> * DATAS_globalStats.infos.statsAccuracyDivider),
                 readableDate: formatTime((<?php echo $statsReport['date']; ?> * DATAS_globalStats.infos.statsAccuracyDivider), 0, "FR"),
                 messages: <?php echo $statsReport['messages']; ?>,
-                voice: <?php echo $statsReport['voice_time']; ?> / 1000,
+                voice_time: <?php echo $statsReport['voice_time']; ?> / 1000,
                 members: <?php echo $statsReport['membres']; ?>,
                 mentions: <?php echo $statsReport['mentions']; ?>
             }],
