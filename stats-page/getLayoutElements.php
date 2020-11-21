@@ -25,7 +25,7 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
             $guildInfos = $oldPDO->query("SELECT * FROM serveurs WHERE id = $guildId")->fetch();
         ?>
 
-        // Global stats
+        // Global stats/infos
         let DATAS_globalStats = {
             total: {
                 messages: <?php echo $guildInfos['messages']; ?>,
@@ -36,6 +36,9 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
                 statsAccuracyDivider: 7200000,
                 botJoinTime: <?php echo $guildInfos['joinedDate']; ?>,
                 guildID: guildId
+            },
+            app: {
+                advancedDebugging: true // Enable/Disable advanced debugging
             }
         }
 

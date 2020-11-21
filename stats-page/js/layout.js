@@ -427,8 +427,20 @@ function overwriteStats(prefixId) {
 
 }
 
-// Draws a chart
+setInterval(() => {
+    console.log(DATAS_statsDatas.members.length);
+}, 100)
+
+// Draws a line chart (see drawPieChart for other charts types)
+// Idea: merging these 2 functions into one with a "chartType" argument/option.
 function drawChart(canvasId, options) {
+
+    if (DATAS_globalStats.app.advancedDebugging == true) {
+        console.groupCollapsed(`[ADVANCED] Attempting to draw a line chart on canvas #${canvasId}.`);
+        console.log(DATAS_statsDatas);
+        console.log(options)
+        console.groupEnd();
+    }
 
     // Checking if stats have been refreshed before drawing chart
     let chartInterval = setInterval(() => {
@@ -452,11 +464,10 @@ function drawChart(canvasId, options) {
 
         // Minimal group size depending on labels number (In MS)
         let statsGroupSize = options.externalDatas.timestamps ?
-            (options.externalDatas.timestamps[0] - options.externalDatas.timestamps[
+            (options.externalDatas.timestamps[
                 options.externalDatas.timestamps.length - 1
-            ]) / dataGroupsPerGraph : 0;
+            ] - options.externalDatas.timestamps[0]) / dataGroupsPerGraph : 0;
 
-        console.log(`statsGroupSize = ${statsGroupSize}`);
         console.log(options)
 
         // Checking datasets lenght, adding elements if needed
@@ -475,6 +486,7 @@ function drawChart(canvasId, options) {
                         options.externalDatas.timestamps[i] / statsGroupSize)]);
                 });
 
+                console.warn(datasetGrouppedDatas);
                 datasetGrouppedDatas = groupBy(datasetGrouppedDatas, [1]);
                 dataset.data.length = 0;
                 chartLabels.length = 0;
@@ -495,7 +507,9 @@ function drawChart(canvasId, options) {
                         })
 
                     dataset.data.push(dataGroupValue)
-                    chartLabels.push(formatTime(dataGroupLabel * statsGroupSize))
+                    chartLabels.push(formatTime(dataGroupLabel * statsGroupSize));
+
+                    console.error(`Push in dataset: ${dataGroupValue} //// label: ${formatTime(dataGroupLabel * statsGroupSize)}`)
 
                 });
             }

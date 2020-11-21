@@ -99,17 +99,17 @@
                 <script>
                     drawChart("chartDashboardMessages", {
                         "datasets": {
-                            labels: DATAS_statsDatas.readableDate,
+                            labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
                                 label: 'Messages',
-                                data: DATAS_statsDatas.messages,
+                                data: DATAS_statsDatas.messages.slice(),
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
                                 borderWidth: 1
                             }]
                         },
                         "externalDatas": {
-                            timestamps: DATAS_statsDatas.date,
+                            timestamps: DATAS_statsDatas.date.slice(),
                             processMethod: "sum"
                         }
                     });
@@ -207,10 +207,10 @@
                 <script>
                     drawChart("chartDashboardMembers", {
                         datasets: {
-                            labels: DATAS_statsDatas.readableDate,
+                            labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
                                 label: 'Membres',
-                                data: DATAS_statsDatas.members,
+                                data: DATAS_statsDatas.members.slice(),
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
                                 borderWidth: 1
@@ -220,7 +220,7 @@
                             beginAtZero: false
                         },
                         "externalDatas": {
-                            timestamps: DATAS_statsDatas.date,
+                            timestamps: DATAS_statsDatas.date.slice(),
                             processMethod: "set"
                         }
                     });
@@ -264,10 +264,10 @@
             <script>
                 drawChart("chartDashboardVoice", {
                     "datasets": {
-                        labels: DATAS_statsDatas.readableDate,
+                        labels: DATAS_statsDatas.readableDate.slice(),
                         datasets: [{
                             label: 'Temps en vocal',
-                            data: DATAS_statsDatas.voice_time,
+                            data: DATAS_statsDatas.voice_time.slice(),
                             backgroundColor: 'rgba(114,137,218,0.4)',
                             borderColor: '#4a64b8',
                             borderWidth: 1
@@ -284,7 +284,7 @@
                         }
                     },
                     "externalDatas": {
-                        timestamps: DATAS_statsDatas.date,
+                        timestamps: DATAS_statsDatas.date.slice(),
                         processMethod: "sum"
                     }
                 });

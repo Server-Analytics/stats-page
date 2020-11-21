@@ -22,17 +22,20 @@
                 <script>
                     drawChart("chartMembersTabMessages", {
                         "datasets": {
-                            labels: DATAS_statsDatas.readableDate,
+                            labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
                                 label: 'Membres',
-                                data: DATAS_statsDatas.members,
+                                data: DATAS_statsDatas.members.slice(),
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
                                 borderWidth: 1
                             }]
                         },
+                        options: {
+                            beginAtZero: false
+                        },
                         "externalDatas": {
-                            timestamps: DATAS_statsDatas.members,
+                            timestamps: DATAS_statsDatas.date.slice(),
                             processMethod: "set"
                         }
                     });
@@ -40,26 +43,26 @@
             </div>
             <div class="stats-info col-lg-3 d-sm-none">
                 <div class="flex align-center primary-stats">
-                    <h1 class="font-family-arial" data-stats-id="members-tab" data-stats-method="total" data-stats-type="messages">99 999</h1>
+                    <h1 class="font-family-arial" data-stats-id="members-tab" data-stats-method="set" data-stats-type="members">...</h1>
                 </div>
-                <h4 class="font-family-arial">Messages</h4>
+                <h4 class="font-family-arial">Membres</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="members-tab" data-stats-type="messages">
+                    <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="members-tab" data-stats-type="members">
                         <span class="indicator equal">=</span> ...
                     </h3>
-                    <h5><i class="fas fa-comment-alt"></i></h5>
+                    <h5><i class="fas fa-user-alt"></i></h5>
                 </div>
-                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">Membres en {indicator}</h5>
             </div>
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="total" data-stats-type="messages">...</h3>
-                    <h5 class="font-family-arial">Messages</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="set" data-stats-type="members">...</h3>
+                    <h5 class="font-family-arial">Membres</h5>
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="average-simpleIndicator" data-stats-type="messages">...</h3>
-                    <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="average-simpleIndicator" data-stats-type="members">...</h3>
+                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
@@ -93,9 +96,17 @@
     <!-- Second stats line -->
     <div class="w-100p flex mobile-wrap">
         <!-- Small: doughnut joins vs leaves -->
-        <div class="stats-box small col-lg-4 col-xs-12 static">
+        <div class="stats-box small col-lg-4 col-xs-12 static tip-overflow-visible">
             <div class="head static">
-                <h4><i class="fas fa-users"></i> Arrivés | Départs</h4>
+
+                <div class="flex btw w-100p">
+                    <h4><i class="fas fa-users"></i> Membres Actifs</h4>
+                    <div class="hover-tooltip display-on-left">
+                        <h4><i class="color-grey fas fa-question-circle"></i></h4>
+                        <span class="hover-tooltiptext">Membres ayant envoyés plus d'un message sur la période sélectionnée</span>
+                    </div>
+                </div>
+
             </div>
             <div class="flex center">
                 <div class="body flex center">
@@ -103,10 +114,10 @@
                     <script>
                         drawPieChart("chartMembersTabInOut", {
                             "datasets": {
-                                labels: ['Arrivés', 'Départs'],
+                                labels: ['Membres Humains', 'Bots Discord'],
                                 datasets: [{
                                     label: 'Membres',
-                                    data: [36, 12],
+                                    data: [36, 2],
                                     backgroundColor: ["#5b78da", "#3f56a0"],
                                     borderColor: ["#5b78da", "#3f56a0"],
                                     hoverColor: ["#3f56a0", "#5b78da"],
@@ -130,10 +141,10 @@
                 <script>
                     drawChart("chartMembersTabMembers", {
                         datasets: {
-                            labels: DATAS_statsDatas.readableDate,
+                            labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
                                 label: 'Membres',
-                                data: DATAS_statsDatas.members,
+                                data: DATAS_statsDatas.members.slice(),
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
                                 borderWidth: 1
@@ -143,9 +154,9 @@
                             beginAtZero: false
                         },
                         "externalDatas": {
-                            timestamps: DATAS_statsDatas.date,
-                            processMethod: "set"
-                        }
+                            timestamps: DATAS_statsDatas.date),
+                        processMethod: "set"
+                    }
                     });
                 </script>
             </div>
@@ -187,17 +198,17 @@
             <script>
                 drawChart("chartMembersTabVoice", {
                     "datasets": {
-                        labels: DATAS_statsDatas.readableDate,
+                        labels: DATAS_statsDatas.readableDate.slice(),
                         datasets: [{
                             label: 'Temps en vocal',
-                            data: DATAS_statsDatas.voice_time,
+                            data: DATAS_statsDatas.voice_time.slice(),
                             backgroundColor: 'rgba(114,137,218,0.4)',
                             borderColor: '#4a64b8',
                             borderWidth: 1
                         }],
                     },
                     "settings": {
-                        tooltip: {
+                        hover - tooltip: {
                             label: ": {label}",
                             formula: "time"
                         },
@@ -207,7 +218,7 @@
                         }
                     },
                     "externalDatas": {
-                        timestamps: DATAS_statsDatas.date,
+                        timestamps: DATAS_statsDatas.date.slice(),
                         processMethod: "sum"
                     }
                 });
