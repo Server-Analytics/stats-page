@@ -14,15 +14,10 @@ let GlobalOptions = {
 
 // You need to call refreshStatsDatas(timerange) in order to access stats datas.
 let DATAS_statsDatas = {}
-
 var dataRefreshState = { state: 0, overwriteStats: false };
 
 // Creating statsDatas from default timerange
 refreshStatsDatas(GlobalOptions.selectedTimerange);
-
-// Getting/Copying DOM objects
-let graphErrorObject = document.getElementById("error-graph-template");
-
 
 /* StatsTabs list
 (set preload to true to keep the tab loaded in order to make the navigation faster) */
@@ -58,6 +53,10 @@ function statLayoutLoaded() {
             if (i + 1 >= Object.keys(preloadedStatsTabs).length) console.groupEnd();
 
         });
+
+        // Getting/Copying DOM objects
+        addComponent("errorGraphTemplate", "error-graph-template");
+
     }
 }
 
@@ -181,7 +180,6 @@ function refreshStatsDatas(timerange) {
                 DATAS_timeranges[GlobalOptions.selectedTimerange][1].forEach(
                     (timerangeStats, i) => {
                         DATAS_statsDatas[statsKeys].push(timerangeStats[0][statsKeys]);
-                        console.log(`DATAS_statsDatas[${statsKeys}].push(${timerangeStats[0][statsKeys]})`);
                     }
                 );
 
@@ -463,10 +461,10 @@ function drawChart(canvasId, options) {
 
         if (options.datasets.datasets[0].data.length <= 0) {
 
-            let statElementContainer = docmiment.getElementById(`CONTAINER_${canvasId}`);
+            let statElementContainer = document.getElementById(`CONTAINER_${canvasId}`);
             if (!statElementContainer) return console.warn(`Cannot find ${canvasId}'s statBox container (No data error)`);
 
-            let errorElement = statElementContainer.appendChild(graphErrorObject);
+            let errorElement = statElementContainer.appendChild(components.errorGraphTemplate);
             errorElement.style.display = "block";
 
         }

@@ -58,7 +58,10 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
                 messages: <?php echo $statsReport['messages']; ?>,
                 voice_time: <?php echo $statsReport['voice_time']; ?> / 1000,
                 members: <?php echo $statsReport['membres']; ?>,
-                mentions: <?php echo $statsReport['mentions']; ?>
+                mentions: <?php echo $statsReport['mentions']; ?>,
+
+                //usersLeaves: <?php echo explode(",",$statsReport['joins-leaves'])[1]; ?>,
+                //usersJoins: <?php echo explode(",",$statsReport['joins-leaves'])[0]; ?>,
             }],
 
             <?php } ?>

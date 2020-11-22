@@ -142,7 +142,7 @@ include("../../../../../../src/php/include/head.php");
                         <h3>Plein de nouveautés se préparent <i class="fas fa-calendar-plus"></i></h3>
                     </div>
                     <div class="flex center w-100p">
-                        <div class="statsButton blue">Supporter le développement</div>
+                        <div class="statsButton blue">Rejoindre le serveur Discord</div>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@ include("../../../../../../src/php/include/head.php");
     </div>
 
     <div class="graph-error display-none" id="error-graph-template">
-        <h4><i class="fa fa-5x fa-exclamation-triangle"></i> Ces données seront récoltées à la prochaine MAJ !</h4>
+        <h4><i class="fas fa-exclamation-triangle"></i> Ces données ne sont pas encore disponibles ! Elles arrivent bientot...</h4>
     </div>
 
     <script>
