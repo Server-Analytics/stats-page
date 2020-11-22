@@ -18,7 +18,10 @@ let DATAS_statsDatas = {}
 var dataRefreshState = { state: 0, overwriteStats: false };
 
 // Creating statsDatas from default timerange
-refreshStatsDatas(GlobalOptions.selectedTimerange)
+refreshStatsDatas(GlobalOptions.selectedTimerange);
+
+// Getting/Copying DOM objects
+let graphErrorObject = document.getElementById("error-graph-template");
 
 
 /* StatsTabs list
@@ -458,6 +461,16 @@ function drawChart(canvasId, options) {
         let chartLabels = options.datasets.labels;
         let dataGroupsPerGraph = 40;
 
+        if (options.datasets.datasets[0].data.length <= 0) {
+
+            let statElementContainer = docmiment.getElementById(`CONTAINER_${canvasId}`);
+            if (!statElementContainer) return console.warn(`Cannot find ${canvasId}'s statBox container (No data error)`);
+
+            let errorElement = statElementContainer.appendChild(graphErrorObject);
+            errorElement.style.display = "block";
+
+        }
+
         // If we have less than 3 labels in each datasets, create empty labels
         if (chartLabels.length <= 3)
             chartLabels.unshift("Aucune données", "Aucune données", "Aucune données");
@@ -467,8 +480,6 @@ function drawChart(canvasId, options) {
             (options.externalDatas.timestamps[
                 options.externalDatas.timestamps.length - 1
             ] - options.externalDatas.timestamps[0]) / dataGroupsPerGraph : 0;
-
-        console.log(options)
 
         // Checking datasets lenght, adding elements if needed
         options.datasets.datasets.forEach(dataset => {
@@ -508,8 +519,6 @@ function drawChart(canvasId, options) {
 
                     dataset.data.push(dataGroupValue)
                     chartLabels.push(formatTime(dataGroupLabel * statsGroupSize));
-
-                    console.error(`Push in dataset: ${dataGroupValue} //// label: ${formatTime(dataGroupLabel * statsGroupSize)}`)
 
                 });
             }

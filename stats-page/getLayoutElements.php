@@ -38,7 +38,7 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
                 guildID: guildId
             },
             app: {
-                advancedDebugging: true // Enable/Disable advanced debugging
+                advancedDebugging: false // Enable/Disable advanced debugging
             }
         }
 

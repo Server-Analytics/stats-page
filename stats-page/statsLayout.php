@@ -149,6 +149,9 @@ include("../../../../../../src/php/include/head.php");
         </div>
     </div>
 
+    <div class="graph-error display-none" id="error-graph-template">
+        <h4><i class="fa fa-5x fa-exclamation-triangle"></i> Ces données seront récoltées à la prochaine MAJ !</h4>
+    </div>
 
     <script>
         statLayoutLoaded();

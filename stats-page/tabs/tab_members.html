@@ -15,7 +15,7 @@
 
     <div class="w-100p flex mobile-wrap">
         <!-- Graph 1 (Members) -->
-        <div class="stats-box large col-lg-8 col-xs-12">
+        <div class="stats-box large col-lg-8 col-xs-12" id="CONTAINER_chartMembersTabMessages">
             <div class="col-lg-9 col-xs-12">
 
                 <canvas id="chartMembersTabMessages" width="100%"></canvas>
@@ -100,10 +100,10 @@
             <div class="head static">
 
                 <div class="flex btw w-100p">
-                    <h4><i class="fas fa-users"></i> Membres Actifs</h4>
+                    <h4><i class="fas fa-history"></i> Ancienneté des membres</h4>
                     <div class="hover-tooltip display-on-left">
                         <h4><i class="color-grey fas fa-question-circle"></i></h4>
-                        <span class="hover-tooltiptext">Membres ayant envoyés plus d'un message sur la période sélectionnée</span>
+                        <span class="hover-tooltiptext">Donnée récoltée après le départ d'un membre</span>
                     </div>
                 </div>
 
@@ -114,13 +114,13 @@
                     <script>
                         drawPieChart("chartMembersTabInOut", {
                             "datasets": {
-                                labels: ['Membres Humains', 'Bots Discord'],
+                                labels: ['Moins d\'un jour', 'Plus de 1 jour', '1 semaine', '1 mois', '3 mois', '6 mois', '1 an et plus'],
                                 datasets: [{
                                     label: 'Membres',
-                                    data: [36, 2],
-                                    backgroundColor: ["#5b78da", "#3f56a0"],
-                                    borderColor: ["#5b78da", "#3f56a0"],
-                                    hoverColor: ["#3f56a0", "#5b78da"],
+                                    data: [36, 12, 3, 14, 9, 12, 8],
+                                    backgroundColor: ["#5B78DA", "#5571CD", "#4F69C1", "#4962B4", "#435BA8", "#3D539B", "#374C8E", "#314482", "#2B3D75"],
+                                    borderColor: ["#5B78DA", "#5571CD", "#4F69C1", "#4962B4", "#435BA8", "#3D539B", "#374C8E", "#314482", "#2B3D75"],
+                                    hoverBackgroundColor: "#94a7eb",
                                     borderWidth: 1
                                 }]
                             },
@@ -134,7 +134,7 @@
         </div>
 
         <!-- Large: members-tab member line chart -->
-        <div class="stats-box large right col-lg-8 col-xs-12">
+        <div class="stats-box large right col-lg-8 col-xs-12" id="CONTAINER_chartMembersTabMembers">
             <div class="col-lg-9 col-xs-12">
 
                 <canvas id="chartMembersTabMembers" width="100%"></canvas>
@@ -143,10 +143,16 @@
                         datasets: {
                             labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
-                                label: 'Membres',
-                                data: DATAS_statsDatas.members.slice(),
+                                label: 'Arrivées',
+                                data: DATAS_statsDatas.usersJoins.slice(),
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
+                                borderWidth: 1
+                            }, {
+                                label: 'Départs',
+                                data: DATAS_statsDatas.usersLeaves.slice(),
+                                backgroundColor: 'rgba(245, 103, 103,0.4)',
+                                borderColor: 'rgb(245, 103, 103)',
                                 borderWidth: 1
                             }]
                         },
@@ -154,9 +160,9 @@
                             beginAtZero: false
                         },
                         "externalDatas": {
-                            timestamps: DATAS_statsDatas.date),
-                        processMethod: "set"
-                    }
+                            timestamps: DATAS_statsDatas.date.slice(),
+                            processMethod: "set"
+                        }
                     });
                 </script>
             </div>
@@ -208,7 +214,7 @@
                         }],
                     },
                     "settings": {
-                        hover - tooltip: {
+                        tooltip: {
                             label: ": {label}",
                             formula: "time"
                         },
