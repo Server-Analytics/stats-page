@@ -19,6 +19,9 @@ var dataRefreshState = { state: 0, overwriteStats: false };
 // Creating statsDatas from default timerange
 refreshStatsDatas(GlobalOptions.selectedTimerange);
 
+// Saved values for stats that needs to be used multiple times
+let savedValues = {};
+
 /* StatsTabs list
 (set preload to true to keep the tab loaded in order to make the navigation faster) */
 
@@ -224,14 +227,13 @@ function overwriteStats(prefixId) {
         let method = statElement.getAttribute("data-stats-method");
         let type = statElement.getAttribute("data-stats-type");
         let format = statElement.getAttribute("data-stats-format") || null;
+        let saveValueUnderName = statElement.getAttribute("data-stats-save-value") || null;
         let result = 0;
 
         let subMethods = method.split("-");
 
         if (!DATAS_statsDatas[type] || DATAS_statsDatas[type].length <= 1)
             DATAS_statsDatas[type] = [0, 0, 0, 0];
-
-        console.log(DATAS_statsDatas[type])
 
         // Calculs methods
         if (method === "total") {
@@ -301,6 +303,20 @@ function overwriteStats(prefixId) {
             result = DATAS_statsDatas[type][DATAS_statsDatas[type].length - 1] -
                 DATAS_statsDatas[type][0];
 
+        } else if (subMethods[0] === "divide") {
+
+            if (!DATAS_statsDatas[subMethods[1]]) return console.warn(`Warning » Cannot find "${subMethods}" dataType. (divide method)`);
+
+            let divideStat = subMethods[2].split(",")[0] == "global" ?
+                DATAS_globalStats.total[type] :
+                DATAS_statsDatas[type][DATAS_statsDatas[subMethods[1]].length - 1];
+
+            let divideBy = subMethods[2].split(",")[1] == "global" ?
+                DATAS_globalStats.total[subMethods[1]] :
+                DATAS_statsDatas[subMethods[1]][DATAS_statsDatas[subMethods[1]].length - 1];
+
+            result = Math.round(((divideStat / divideBy) + Number.EPSILON) * 100) / 100;
+
         } else {
             console.warn(`Cannot find any "${subMethods[0]}" method.`)
             result = 0;
@@ -335,6 +351,7 @@ function overwriteStats(prefixId) {
             }
         } else {}
 
+        subFormattedResult.push(result);
         result = subFormattedResult[1] == "-" ?
             '-' + result : result;
 
@@ -354,6 +371,38 @@ function overwriteStats(prefixId) {
 
                 statsTextIndicator = subFormattedResult[0] > 0 ? "plus" : "moins";
 
+            }
+            if (method.split("-")[1] == "statIndicator") {
+
+                let indicatorMeter = {
+                    messagePerMemberActivity: {
+                        3: "Très faible activité",
+                        10: "Faible activité",
+                        30: "Serveur peu actif",
+                        50: "Activité passive",
+                        150: "Membres peu investits",
+                        160: "Serveur moyennement actif",
+                        200: "Activité correcte",
+                        400: "Serveur actif",
+                        99999999999999: "Serveur très actif"
+                    }
+                }
+
+                if (method.split("-")[2]) {
+                    let savedStatIndicator = savedValues[method.split("-")[2]];
+                    if (savedStatIndicator) {
+
+                        let textIndicator = null;
+
+                        for (const [key, value] of Object.entries(indicatorMeter[method.split("-")[2]])) {
+                            if (savedStatIndicator <= key && !textIndicator) textIndicator = value;
+                        }
+
+                        result = `<h5 class="stat-indicator-text">${textIndicator}</h5>`;
+                    }
+                } else
+                    result = ":/";
+
             } else if (method.split("-")[1] == "chevron") {
 
                 result = subFormattedResult[0] == 0 ? '<i class="fas fa-chevron-up"></i> ' :
@@ -367,7 +416,7 @@ function overwriteStats(prefixId) {
             } else if (method.split("-")[1] == "simpleIndicator") {
 
                 result = subFormattedResult[0] == 0 ? "+" : subFormattedResult[0] > 0 ? "+" : "-";
-                result += subFormattedResult[0];
+                result += subFormattedResult[2];
                 statsTextIndicator = subFormattedResult[0] > 0 ? "plus" : "moins";
 
             }
@@ -375,7 +424,10 @@ function overwriteStats(prefixId) {
 
         // Check for childrens node to be filled:
         if (subMethods.includes("text")) {
-            for (let child of statElement.parentNode.parentNode.children) {
+            for (let child of deviceScreenSize == "sm" ?
+                    statElement.parentNode.children : statElement.parentNode.parentNode.children) {
+
+                console.log(child)
 
                 let dataTypeAttribute = child.getAttribute("data-stats-type");
 
@@ -400,6 +452,9 @@ function overwriteStats(prefixId) {
         // groupEnd if last stat-element
         if ((i + 1) >= statsElementsSize) console.groupEnd();
 
+        // If needed, save the value
+        if (saveValueUnderName)
+            savedValues[saveValueUnderName] = result;
     });
 
     // Edit timetamp modal
@@ -458,7 +513,8 @@ function drawChart(canvasId, options) {
         if (!options) options = {};
         if (!options.settings) options.settings = {};
         let chartLabels = options.datasets.labels;
-        let dataGroupsPerGraph = 40;
+        let dataGroupsPerGraph = 40 *
+            (options.externalDatas.dataGroupPrecision ? options.externalDatas.dataGroupPrecision : 1);
 
         if (options.datasets.datasets[0].data.length <= 0) {
 
@@ -497,7 +553,6 @@ function drawChart(canvasId, options) {
                         options.externalDatas.timestamps[i] / statsGroupSize)]);
                 });
 
-                console.warn(datasetGrouppedDatas);
                 datasetGrouppedDatas = groupBy(datasetGrouppedDatas, [1]);
                 dataset.data.length = 0;
                 chartLabels.length = 0;

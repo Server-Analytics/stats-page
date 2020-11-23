@@ -61,8 +61,8 @@
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="average-simpleIndicator" data-stats-type="members">...</h3>
-                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="comparison-simpleIndicator" data-stats-type="members">...</h3>
+                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">Membres en {indicator}</h5>
                 </div>
             </div>
         </div>
@@ -193,8 +193,8 @@
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="average-simpleIndicator" data-stats-type="usersJoins">...</h3>
-                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="comparison-simpleIndicator" data-stats-type="usersJoins">...</h3>
+                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">Arrivées en {indicator}</h5>
                 </div>
             </div>
         </div>
@@ -213,7 +213,7 @@
                     "datasets": {
                         labels: DATAS_statsDatas.readableDate.slice(),
                         datasets: [{
-                            label: 'Membres en ligne',
+                            label: 'En ligne',
                             data: DATAS_statsDatas.usersOnline ? DATAS_statsDatas.usersOnline.slice() : [],
                             backgroundColor: 'rgba(114,137,218,0.4)',
                             borderColor: '#4a64b8',
@@ -222,9 +222,6 @@
                     },
                     "settings": {
                         tooltip: {
-                            label: ": {label} membres"
-                        },
-                        yAxis: {
                             label: ": {label} membres"
                         }
                     },
@@ -241,10 +238,10 @@
             </div>
             <h4 class="font-family-arial">En ligne</h4>
             <div class="flex align-center secondary-stats">
-                <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="members-tab" data-stats-type="usersOnline">...</h3>
+                <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="members-tab" data-stats-type="usersOnline">...</h3>
                 <h5><i class="fas fa-user-clock"></i></h5>
             </div>
-            <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
+            <h5 class="font-family-arial" data-stats-type="stats-text-indicator">En {indicator}</h5>
         </div>
         <div class="stats-info-mobile d-lg-none col-xs-12 flex">
             <div class="primary-stats">
@@ -253,8 +250,8 @@
             </div>
             <div class="separator"></div>
             <div class="secondary-stats">
-                <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="average-simpleIndicator" data-stats-type="usersOnline">...</h3>
-                <h5 class=" font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="usersOnline">...</h3>
+                <h5 class=" font-family-arial" data-stats-method="average-indicator-text">En {indicator}</h5>
             </div>
         </div>
     </div>

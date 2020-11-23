@@ -18,14 +18,14 @@
         <div class="stats-box large col-lg-8 col-xs-12" id="CONTAINER_chartMembersTabMessages">
             <div class="col-lg-9 col-xs-12">
 
-                <canvas id="chartMembersTabMessages" width="100%"></canvas>
+                <canvas id="chartMessages_TabMessages" width="100%"></canvas>
                 <script>
-                    drawChart("chartMembersTabMessages", {
+                    drawChart("chartMessages_TabMessages", {
                         "datasets": {
                             labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
                                 label: 'Membres',
-                                data: DATAS_statsDatas.members.slice(),
+                                data: DATAS_statsDatas.messages.slice(),
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
                                 borderWidth: 1
@@ -36,58 +36,67 @@
                         },
                         "externalDatas": {
                             timestamps: DATAS_statsDatas.date.slice(),
-                            processMethod: "set"
+                            processMethod: "set",
+                            dataGroupPrecision: 1.5
                         }
                     });
                 </script>
             </div>
             <div class="stats-info col-lg-3 d-sm-none">
                 <div class="flex align-center primary-stats">
-                    <h1 class="font-family-arial" data-stats-id="messages-tab" data-stats-method="set" data-stats-type="members">...</h1>
+                    <h1 class="font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="messages">...</h1>
                 </div>
-                <h4 class="font-family-arial">Membres</h4>
+                <h4 class="font-family-arial">Messages</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="messages-tab" data-stats-type="members">
+                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="messages">
                         <span class="indicator equal">=</span> ...
                     </h3>
-                    <h5><i class="fas fa-user-alt"></i></h5>
+                    <h5><i class="fas fa-comment-alt"></i></h5>
                 </div>
-                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">Membres en {indicator}</h5>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">Messages en {indicator}</h5>
             </div>
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="set" data-stats-type="members">...</h3>
-                    <h5 class="font-family-arial">Membres</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="messages">...</h3>
+                    <h5 class="font-family-arial">Messages</h5>
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="members">...</h3>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="messages">...</h3>
                     <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
 
         <!-- Stats #2 - Mentions/Pings -->
-        <div class="stats-box right small col-lg-4 col-xs-12 flex box-center">
+        <div class="stats-box tip-overflow-visible right small col-lg-4 col-xs-12 flex box-center">
             <div class="head d-sm-none">
-                <h4><i class="fas fa-at"></i> Mentions / Pings</h4>
+                <div class="flex btw w-100p">
+                    <h4><i class="fas fa-comments"></i> Messages par membre</h4>
+                    <div class="hover-tooltip force-display-on-left">
+                        <h4><i class="color-grey fas fa-question-circle"></i></h4>
+                        <span class="hover-tooltiptext">Messages envoyés en moyenne par chaque membre. Cette statistique révèle la réelle activité du serveur, elle est très importante !</span>
+                    </div>
+                </div>
             </div>
             <div class="body">
                 <div class="flex wrap center">
                     <div class="flex center w-100p text align-center d-sm-none">
-                        <h1 data-stats-id="messages-tab" data-stats-method="total" data-stats-type="mentions">75 621</h1>
-                        <h2><i class="fas fa-at"></i></h2>
+                        <h1 data-stats-id="messages-tab" data-stats-method="divide-members-global,datatype" data-stats-save-value="messagePerMemberActivity" data-stats-type="messages">...</h1>
+                        <h2><i class="fas fa-comment-alt"></i></h2>
                     </div>
                     <div class="flex center w-100p d-lg-none align-center">
-                        <h2 data-stats-id="messages-tab" data-stats-method="total" data-stats-type="mentions">75 621</h2>
-                        <h4><i class="fas fa-at"></i></h4>
+                        <h2 data-stats-id="messages-tab" data-stats-method="divide-members-global,datatype" data-stats-type="messages">...</h2>
+                        <h4><i class="fas fa-comment-alt"></i></h4>
                     </div>
-                    <h4>Mentions envoyées</h4>
-                    <h5 class="moyenne">
-                        <span data-stats-id="messages-tab" data-stats-method="average-chevron-text" data-stats-type="mentions">
+                    <div>
+                        <h4>Messages par membre</h4>
+                        <h5 class="moyenne">
+                            <span data-stats-id="messages-tab" data-stats-method="average-statIndicator-messagePerMemberActivity" data-stats-type="mentions">
                             <i class="fas fa-chevron-up"></i> <strong>...</strong>
                         </span>
-                    </h5>
+                        </h5>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,74 +106,101 @@
     <div class="w-100p flex mobile-wrap">
         <!-- Small: doughnut joins vs leaves -->
         <div class="stats-box small col-lg-4 col-xs-12 static tip-overflow-visible">
-            <div class="head static">
-
-                <div class="flex btw w-100p">
-                    <h4><i class="fas fa-history"></i> Ancienneté des membres</h4>
-                    <div class="hover-tooltip display-on-left">
-                        <h4><i class="color-grey fas fa-question-circle"></i></h4>
-                        <span class="hover-tooltiptext">Donnée récoltée après le départ d'un membre</span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="flex center relative">
-
-                <!-- ERROR datas not available yet -->
-                <div class="graph-error small-error" id="error-graph-template">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Pas encore disponible !</h4>
-                </div>
-                <!-- ERROR datas not available yet -->
-
-                <div class="body flex center">
-                    <canvas id="chartMembersTabInOut" width="80%"></canvas>
-                    <script>
-                        drawPieChart("chartMembersTabInOut", {
-                            "datasets": {
-                                labels: ['Moins d\'un jour', 'Plus de 1 jour', '1 semaine', '1 mois', '3 mois', '6 mois', '1 an et plus'],
-                                datasets: [{
-                                    label: 'Membres',
-                                    data: [36, 12, 3, 14, 9, 12, 8],
-                                    backgroundColor: ["#5B78DA", "#5571CD", "#4F69C1", "#4962B4", "#435BA8", "#3D539B", "#374C8E", "#314482", "#2B3D75"],
-                                    borderColor: ["#5B78DA", "#5571CD", "#4F69C1", "#4962B4", "#435BA8", "#3D539B", "#374C8E", "#314482", "#2B3D75"],
-                                    hoverBackgroundColor: "#94a7eb",
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                type: "doughnut"
-                            }
-                        });
-                    </script>
-                </div>
+            <div style="width:100%;height:18em;">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- square_responsive_ad -->
+                <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    window.onload = function() {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                </script>
             </div>
         </div>
 
         <!-- Large: messages-tab member line chart -->
-        <div class="stats-box large right col-lg-8 col-xs-12" id="CONTAINER_chartMembersTabMembers">
+        <div class="stats-box large right col-lg-8 col-xs-12" id="CONTAINER_chartTypetime_TabMessages">
             <div class="col-lg-9 col-xs-12">
 
-                <canvas id="chartMembersTabMembers" width="100%"></canvas>
+                <canvas id="chartTypetime_TabMessages" width="100%"></canvas>
                 <script>
-                    drawChart("chartMembersTabMembers", {
+                    drawChart("chartTypetime_TabMessages", {
                         datasets: {
                             labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
-                                label: 'Arrivées',
-                                data: DATAS_statsDatas.usersJoins ? DATAS_statsDatas.usersJoins.slice() : [],
+                                label: 'Temps passé à écrire',
+                                data: DATAS_statsDatas.typetime ? DATAS_statsDatas.typetime.slice() : [],
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
-                                borderWidth: 1
-                            }, {
-                                label: 'Départs',
-                                data: DATAS_statsDatas.usersLeaves ? DATAS_statsDatas.usersLeaves.slice() : [],
-                                backgroundColor: 'rgba(245, 103, 103,0.4)',
-                                borderColor: 'rgb(245, 103, 103)',
                                 borderWidth: 1
                             }]
                         },
                         options: {
-                            beginAtZero: false
+                            beginAtZero: false,
+                        },
+                        "settings": {
+                            tooltip: {
+                                label: ": {label}",
+                                formula: "time"
+                            },
+                            yAxis: {
+                                label: ": {label}",
+                                formula: "time"
+                            }
+                        },
+                        "externalDatas": {
+                            timestamps: DATAS_statsDatas.date.slice(),
+                            processMethod: "sum",
+
+                        }
+                    });
+                </script>
+            </div>
+            <div class="stats-info col-lg-3 d-sm-none">
+                <div class="flex align-center primary-stats">
+                    <h1 class="font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="typetime" data-stats-format="time">...</h1>
+                </div>
+                <h4 class="font-family-arial">Passés à écrire</h4>
+                <div class="flex align-center secondary-stats">
+                    <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="messages-tab" data-stats-type="typetime" data-stats-format="time">
+                        <span class=" indicator equal">=</span> ...
+                    </h3>
+                    <h5><i class="fas fa-keyboard"></i></h5>
+                </div>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
+            </div>
+            <div class="stats-info-mobile d-lg-none col-xs-12 flex">
+                <div class="primary-stats">
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="typetime" data-stats-format="time">...</h3>
+                    <h5 class=" font-family-arial">Passés à écrire</h5>
+                </div>
+                <div class="separator"></div>
+                <div class="secondary-stats">
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="typetime" data-stats-format="time">...</h3>
+                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thrid stats line -->
+    <div class="w-100p flex mobile-wrap">
+        <!-- Large: voice_time line graph -->
+        <div class="stats-box large col-lg-8 col-xs-12" id="CONTAINER_chartMessagesTab_mentions">
+            <div class="col-lg-9 col-xs-12">
+
+                <canvas id="chartMessagesTab_mentions" width="100%"></canvas>
+                <script>
+                    drawChart("chartMessagesTab_mentions", {
+                        "datasets": {
+                            labels: DATAS_statsDatas.readableDate.slice(),
+                            datasets: [{
+                                label: 'Mentions',
+                                data: DATAS_statsDatas.mentions ? DATAS_statsDatas.mentions.slice() : [],
+                                backgroundColor: 'rgba(114,137,218,0.4)',
+                                borderColor: '#4a64b8',
+                                borderWidth: 1
+                            }],
                         },
                         "externalDatas": {
                             timestamps: DATAS_statsDatas.date.slice(),
@@ -175,25 +211,134 @@
             </div>
             <div class="stats-info col-lg-3 d-sm-none">
                 <div class="flex align-center primary-stats">
-                    <h1 class="font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="usersJoins">...</h1>
+                    <h1 class="font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="mentions">...</h1>
                 </div>
-                <h4 class="font-family-arial">Arrivées</h4>
+                <h4 class="font-family-arial">Mentions</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="messages-tab" data-stats-type="usersJoins">
-                        <span class=" indicator equal">=</span> ...
-                    </h3>
-                    <h5><i class="fas fa-user-alt"></i></h5>
+                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="mentions">...</h3>
+                    <h5><i class="fas fa-at"></i></h5>
                 </div>
-                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">Arrivées en {indicator}</h5>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
             </div>
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="usersJoins">...</h3>
-                    <h5 class=" font-family-arial">Arrivées</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="mentions">...</h3>
+                    <h5 class="font-family-arial">Mentions</h5>
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="usersJoins">...</h3>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="mentions">...</h3>
+                    <h5 class=" font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Small: doughnut messages bots vs. humains -->
+        <div class="stats-box small col-lg-4 col-xs-12 static right">
+            <div class="w-100p">
+
+                <div class="head static">
+                    <h4><i class="fas fa-history"></i> Origine des messages</h4>
+                </div>
+                <div class="flex center relative">
+
+                    <!-- ERROR datas not available yet -->
+                    <div class="graph-error small-error" id="error-graph-template">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Pas encore disponible !</h4>
+                    </div>
+                    <!-- ERROR datas not available yet -->
+
+                    <div class="body flex center w-100p">
+                        <canvas id="botsHumains_tabMessages" width="80%"></canvas>
+                        <script>
+                            drawPieChart("botsHumains_tabMessages", {
+                                "datasets": {
+                                    labels: ['Humains', 'Bots'],
+                                    datasets: [{
+                                        label: 'Messages',
+                                        data: [360, 56],
+                                        backgroundColor: ["#5B78DA", "#435BA8"],
+                                        borderColor: ["#5B78DA", "#435BA8"],
+                                        hoverBackgroundColor: "#94a7eb",
+                                        borderWidth: 0
+                                    }]
+                                },
+                                options: {
+                                    type: "doughnut"
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fourth stats line -->
+    <div class="w-100p flex mobile-wrap">
+        <!-- Small: Advert. -->
+        <div class="stats-box small col-lg-4 col-xs-12 static tip-overflow-visible">
+            <div style="width:100%;height:18em;">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- square_responsive_ad -->
+                <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    window.onload = function() {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                </script>
+            </div>
+        </div>
+
+        <!-- Large: messages-tab member line chart -->
+        <div class="stats-box large right col-lg-8 col-xs-12" id="CONTAINER_deletedMessages_TabMessages">
+            <div class="col-lg-9 col-xs-12">
+
+                <canvas id="deletedMessages_TabMessages" width="100%"></canvas>
+                <script>
+                    drawChart("deletedMessages_TabMessages", {
+                        datasets: {
+                            labels: DATAS_statsDatas.readableDate.slice(),
+                            datasets: [{
+                                label: 'Messages supprimés',
+                                data: DATAS_statsDatas.deletedMessages ? DATAS_statsDatas.deletedMessages.slice() : [],
+                                backgroundColor: 'rgba(245, 103, 103,0.4)',
+                                borderColor: 'rgb(245, 103, 103)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            beginAtZero: false,
+                        },
+                        "externalDatas": {
+                            timestamps: DATAS_statsDatas.date.slice(),
+                            processMethod: "sum",
+
+                        }
+                    });
+                </script>
+            </div>
+            <div class="stats-info col-lg-3 d-sm-none">
+                <div class="flex align-center primary-stats">
+                    <h1 class="font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="deletedMessages">...</h1>
+                </div>
+                <h4 class="font-family-arial">Messages supprimés</h4>
+                <div class="flex align-center secondary-stats">
+                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="deletedMessages">
+                        <span class=" indicator equal">=</span> ...
+                    </h3>
+                    <h5><i class="fas fa-comment-slash"></i></h5>
+                </div>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
+            </div>
+            <div class="stats-info-mobile d-lg-none col-xs-12 flex">
+                <div class="primary-stats">
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="deletedMessages">...</h3>
+                    <h5 class=" font-family-arial">Messages supprimés</h5>
+                </div>
+                <div class="separator"></div>
+                <div class="secondary-stats">
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="deletedMessages">...</h3>
                     <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
@@ -201,78 +346,27 @@
     </div>
 </div>
 
-<!-- Thrid stats line -->
-<div class="w-100p flex mobile-wrap">
-    <!-- Large: voice_time line graph -->
-    <div class="stats-box large col-lg-8 col-xs-12" id="CONTAINER_chartMembersTab_online">
-        <div class="col-lg-9 col-xs-12">
-
-            <canvas id="chartMembersTab_online" width="100%"></canvas>
-            <script>
-                drawChart("chartMembersTab_online", {
-                    "datasets": {
-                        labels: DATAS_statsDatas.readableDate.slice(),
-                        datasets: [{
-                            label: 'Membres en ligne',
-                            data: DATAS_statsDatas.usersOnline ? DATAS_statsDatas.usersOnline.slice() : [],
-                            backgroundColor: 'rgba(114,137,218,0.4)',
-                            borderColor: '#4a64b8',
-                            borderWidth: 1
-                        }],
-                    },
-                    "settings": {
-                        tooltip: {
-                            label: ": {label} membres"
-                        },
-                        yAxis: {
-                            label: ": {label} membres"
-                        }
-                    },
-                    "externalDatas": {
-                        timestamps: DATAS_statsDatas.date.slice(),
-                        processMethod: "sum"
-                    }
-                });
-            </script>
-        </div>
-        <div class="stats-info col-lg-3 d-sm-none">
-            <div class="flex align-center primary-stats">
-                <h1 class="font-family-arial" data-stats-id="messages-tab" data-stats-method="global" data-stats-type="usersOnline">...</h1>
-            </div>
-            <h4 class="font-family-arial">En ligne</h4>
-            <div class="flex align-center secondary-stats">
-                <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="usersOnline">...</h3>
-                <h5><i class="fas fa-user-clock"></i></h5>
-            </div>
-            <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
-        </div>
-        <div class="stats-info-mobile d-lg-none col-xs-12 flex">
-            <div class="primary-stats">
-                <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="global" data-stats-type="usersOnline">...</h3>
-                <h5 class="font-family-arial">En Ligne</h5>
-            </div>
-            <div class="separator"></div>
-            <div class="secondary-stats">
-                <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="average-simpleIndicator" data-stats-type="usersOnline">...</h3>
-                <h5 class=" font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
-            </div>
-        </div>
+<div class="w-100p flex btw">
+    <div style="width:100%;height:10em;">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- square_responsive_ad -->
+        <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            window.onload = function() {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        </script>
     </div>
-
-    <!-- Stats #2 - Advert. -->
-    <div class="stats-box right small col-lg-4 col-xs-12 flex box-center box center">
-        <div style="width:100%;height:18em;">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- square_responsive_ad -->
-            <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-                window.onload = function() {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                }
-            </script>
-        </div>
+    <div style="width:100%;height:10em;">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- square_responsive_ad -->
+        <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            window.onload = function() {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        </script>
     </div>
-</div>
 </div>
 
 <!-- Modals -->
@@ -284,7 +378,7 @@
                     <h4 class="title">Plage de données</h4>
                 </div>
                 <div>
-                    <h3 class="cancel-button" onclick="closeModal( 'messages-tab_timerangeModal');">&times;</h3>
+                    <h3 class="cancel-button" onclick="closeModal('messages-tab_timerangeModal');">&times;</h3>
                 </div>
             </div>
             <div class="modal-element-body" id="messages-tab_timespampModal">
