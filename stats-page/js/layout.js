@@ -228,6 +228,11 @@ function overwriteStats(prefixId) {
 
         let subMethods = method.split("-");
 
+        if (!DATAS_statsDatas[type] || DATAS_statsDatas[type].length <= 1)
+            DATAS_statsDatas[type] = [0, 0, 0, 0];
+
+        console.log(DATAS_statsDatas[type])
+
         // Calculs methods
         if (method === "total") {
             DATAS_statsDatas[type].forEach((stats) => {
@@ -239,13 +244,11 @@ function overwriteStats(prefixId) {
 
         } else if (subMethods[0] === "global") { /* Global Stats */
 
-            result = DATAS_globalStats.total[type];
+            result = DATAS_globalStats.total[type] ? DATAS_globalStats.total[type] : 0;
 
         } else if (subMethods[0] === "average") {
 
             // Getting the average value for any dataType
-            // I hope you like maths...
-
             let baseTimerangeDatas = 0;
             DATAS_statsDatas[type].forEach((stats) => {
                 baseTimerangeDatas += stats;
@@ -303,6 +306,8 @@ function overwriteStats(prefixId) {
             result = 0;
         }
 
+        if (isNaN(result))
+            result = 0;
 
         let subFormattedResult = [result, result < 0 ? "-" : "+"];
         let statsTextIndicator = null;
@@ -428,10 +433,6 @@ function overwriteStats(prefixId) {
 
 }
 
-setInterval(() => {
-    console.log(DATAS_statsDatas.members.length);
-}, 100)
-
 // Draws a line chart (see drawPieChart for other charts types)
 // Idea: merging these 2 functions into one with a "chartType" argument/option.
 function drawChart(canvasId, options) {
@@ -464,7 +465,8 @@ function drawChart(canvasId, options) {
             let statElementContainer = document.getElementById(`CONTAINER_${canvasId}`);
             if (!statElementContainer) return console.warn(`Cannot find ${canvasId}'s statBox container (No data error)`);
 
-            let errorElement = statElementContainer.appendChild(components.errorGraphTemplate);
+            let clonedErrorElement = components.errorGraphTemplate.cloneNode(true);
+            let errorElement = statElementContainer.appendChild(clonedErrorElement);
             errorElement.style.display = "block";
 
         }

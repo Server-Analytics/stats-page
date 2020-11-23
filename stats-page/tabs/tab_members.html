@@ -111,7 +111,7 @@
             <div class="flex center relative">
 
                 <!-- ERROR datas not available yet -->
-                <div class="graph-error graph-error-no-margin-top" id="error-graph-template">
+                <div class="graph-error small-error" id="error-graph-template">
                     <h4><i class="fas fa-exclamation-triangle"></i> Pas encore disponible !</h4>
                 </div>
                 <!-- ERROR datas not available yet -->
@@ -180,21 +180,21 @@
                 <h4 class="font-family-arial">Arrivées</h4>
                 <div class="flex align-center secondary-stats">
                     <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="members-tab" data-stats-type="usersJoins">
-                        <span class=" indicator equal ">=</span> ...
+                        <span class=" indicator equal">=</span> ...
                     </h3>
-                    <h5><i class="fas fa-user-alt "></i></h5>
+                    <h5><i class="fas fa-user-alt"></i></h5>
                 </div>
-                <h5 class="font-family-arial " data-stats-type="stats-text-indicator ">Arrivées en {indicator}</h5>
+                <h5 class="font-family-arial" data-stats-type="stats-text-indicator">Arrivées en {indicator}</h5>
             </div>
-            <div class="stats-info-mobile d-lg-none col-xs-12 flex ">
-                <div class="primary-stats ">
-                    <h3 class="no-break font-family-arial " data-stats-id="members-tab " data-stats-method="total" data-stats-type="usersJoins">...</h3>
-                    <h5 class=" font-family-arial ">Arrivées</h5>
+            <div class="stats-info-mobile d-lg-none col-xs-12 flex">
+                <div class="primary-stats">
+                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="total" data-stats-type="usersJoins">...</h3>
+                    <h5 class=" font-family-arial">Arrivées</h5>
                 </div>
-                <div class="separator "></div>
-                <div class="secondary-stats ">
-                    <h3 class="no-break font-family-arial " data-stats-id="members-tab " data-stats-method="average-simpleIndicator" data-stats-type="usersJoins ">...</h3>
-                    <h5 class="font-family-arial " data-stats-method="average-indicator-text ">De {indicator} qu'en moyenne</h5>
+                <div class="separator"></div>
+                <div class="secondary-stats">
+                    <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="average-simpleIndicator" data-stats-type="usersJoins">...</h3>
+                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
@@ -204,7 +204,7 @@
 <!-- Thrid stats line -->
 <div class="w-100p flex mobile-wrap">
     <!-- Large: voice_time line graph -->
-    <div class="stats-box large col-lg-8 col-xs-12 " id="CONTAINER_chartMembersTab_online">
+    <div class="stats-box large col-lg-8 col-xs-12" id="CONTAINER_chartMembersTab_online">
         <div class="col-lg-9 col-xs-12">
 
             <canvas id="chartMembersTab_online" width="100%"></canvas>
@@ -214,7 +214,7 @@
                         labels: DATAS_statsDatas.readableDate.slice(),
                         datasets: [{
                             label: 'Membres en ligne',
-                            data: DATAS_statsDatas.usersOnline.slice(),
+                            data: DATAS_statsDatas.usersOnline ? DATAS_statsDatas.usersOnline.slice() : [],
                             backgroundColor: 'rgba(114,137,218,0.4)',
                             borderColor: '#4a64b8',
                             borderWidth: 1
@@ -235,60 +235,64 @@
                 });
             </script>
         </div>
-        <div class="stats-info col-lg-3 d-sm-none ">
-            <div class="flex align-center primary-stats ">
-                <h1 class="font-family-arial " data-stats-id="members-tab" data-stats-method="set" data-stats-format="time" data-stats-type="usersOnline">...</h1>
+        <div class="stats-info col-lg-3 d-sm-none">
+            <div class="flex align-center primary-stats">
+                <h1 class="font-family-arial" data-stats-id="members-tab" data-stats-method="global" data-stats-type="usersOnline">...</h1>
             </div>
-            <h4 class="font-family-arial ">En ligne</h4>
-            <div class="flex align-center secondary-stats ">
-                <h3 class="font-family-arial " data-stats-method="average-indicator-text" data-stats-id="members-tab" data-stats-type="usersOnline">...</h3>
-                <h5><i class="fas fa-microphone "></i></h5>
+            <h4 class="font-family-arial">En ligne</h4>
+            <div class="flex align-center secondary-stats">
+                <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="members-tab" data-stats-type="usersOnline">...</h3>
+                <h5><i class="fas fa-user-clock"></i></h5>
             </div>
             <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
         </div>
-        <div class="stats-info-mobile d-lg-none col-xs-12 flex ">
-            <div class="primary-stats ">
-                <h3 class="no-break font-family-arial ">99 999</h3>
-                <h5 class="font-family-arial ">Messages</h5>
+        <div class="stats-info-mobile d-lg-none col-xs-12 flex">
+            <div class="primary-stats">
+                <h3 class="no-break font-family-arial" data-stats-id="members-tab" data-stats-method="global" data-stats-type="usersOnline">...</h3>
+                <h5 class="font-family-arial">En Ligne</h5>
             </div>
-            <div class="separator "></div>
-            <div class="secondary-stats ">
-                <h3 class="no-break font-family-arial ">+ 18 999</h3>
-                <h5 class="font-family-arial ">De plus qu'en moyenne</h5>
+            <div class="separator"></div>
+            <div class="secondary-stats">
+                <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="average-simpleIndicator" data-stats-type="usersOnline">...</h3>
+                <h5 class=" font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
             </div>
         </div>
     </div>
 
-    <!-- Stats #2 - Mentions/Pings -->
-    <div class="stats-box right small col-lg-4 col-xs-12 flex box-center box center ">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js "></script>
-        <!-- square_responsive_ad -->
-        <ins class="adsbygoogle " style="display:block " data-ad-client="ca-pub-2548566032630877 " data-ad-slot="3986853067 " data-ad-format="auto " data-full-width-responsive="true "></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+    <!-- Stats #2 - Advert. -->
+    <div class="stats-box right small col-lg-4 col-xs-12 flex box-center box center">
+        <div style="width:100%;height:18em;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- square_responsive_ad -->
+            <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                window.onload = function() {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                }
+            </script>
+        </div>
     </div>
 </div>
 </div>
 
 <!-- Modals -->
-<div id="members-tab_timerangeModal " class="modal-element-container ">
-    <div class="flex line-center ">
-        <div class="modal-element col-lg-5 col-sm-10 col-xs-11 hide-scrollbar ">
-            <div class="modal-element-header flex align-center btw ">
+<div id="members-tab_timerangeModal" class="modal-element-container">
+    <div class="flex line-center">
+        <div class="modal-element col-lg-5 col-sm-10 col-xs-11 hide-scrollbar">
+            <div class="modal-element-header flex align-center btw">
                 <div>
-                    <h4 class="title ">Plage de données</h4>
+                    <h4 class="title">Plage de données</h4>
                 </div>
                 <div>
-                    <h3 class="cancel-button " onclick="closeModal( 'members-tab_timerangeModal'); ">&times;</h3>
+                    <h3 class="cancel-button" onclick="closeModal( 'members-tab_timerangeModal');">&times;</h3>
                 </div>
             </div>
-            <div class="modal-element-body " id="members-tab_timespampModal ">
+            <div class="modal-element-body" id="members-tab_timespampModal">
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    overwriteStats("members-tab ");
+    overwriteStats("members-tab");
 </script>
