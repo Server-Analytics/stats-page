@@ -54,7 +54,9 @@
             </div>
             <div class="text">
                 <h4>Membres</h4>
-                <h5><i class="fas fa-user"></i> 99 999</h5>
+                <h5><i class="fas fa-user"></i>
+                    <span data-stats-id="dashboard" data-stats-method="global" data-stats-type="memberCount">...</span>
+                </h5>
             </div>
         </div>
     </div>
@@ -82,7 +84,9 @@
             </div>
             <div class="text">
                 <h4>En ligne</h4>
-                <h5><i class="fas fa-user"></i> 99 999</h5>
+                <h5><i class="fas fa-user-clock"></i>
+                    <span data-stats-id="dashboard" data-stats-method="global" data-stats-type="presenceCount">...</span>
+                </h5>
             </div>
         </div>
     </div>
@@ -121,7 +125,7 @@
                 </div>
                 <h4 class="font-family-arial">Messages</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="messages">
+                    <h3 class="font-family-arial flex" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="messages">
                         <span class="indicator equal">=</span> ...
                     </h3>
                     <h5><i class="fas fa-comment-alt"></i></h5>
@@ -135,7 +139,7 @@
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="average-simpleIndicator" data-stats-type="messages">...</h3>
+                    <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="average-simpleIndicator-text" data-stats-type="messages">...</h3>
                     <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
@@ -174,7 +178,14 @@
             <div class="head static">
                 <h4><i class="fas fa-users"></i> Arrivés | Départs</h4>
             </div>
-            <div class="flex center">
+            <div class="flex center relative">
+
+                <!-- ERROR datas not available yet -->
+                <div class="graph-error small-error" id="error-graph-template">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Pas encore disponible !</h4>
+                </div>
+                <!-- ERROR datas not available yet -->
+
                 <div class="body flex center">
                     <canvas id="chartDashboardInOut" width="80%"></canvas>
                     <script>
@@ -232,7 +243,7 @@
                 </div>
                 <h4 class="font-family-arial">Membres</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="dashboard" data-stats-type="members">
+                    <h3 class="font-family-arial flex" data-stats-method="comparison-indicator-text" data-stats-id="dashboard" data-stats-type="members">
                         <span class="indicator equal">=</span> ...
                     </h3>
                     <h5><i class="fas fa-user-alt"></i></h5>
@@ -295,8 +306,8 @@
                 <h1 class="font-family-arial" data-stats-id="dashboard" data-stats-method="total" data-stats-format="time" data-stats-type="voice_time">...</h1>
             </div>
             <h4 class="font-family-arial">Temps vocal</h4>
-            <div class="flex align-center secondary-stats">
-                <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="voice_time" data-stats-format="time">...</h3>
+            <div class="flex align-center secondary-stats flex">
+                <h3 class="font-family-arial flex" data-stats-method="average-indicator-text" data-stats-id="dashboard" data-stats-type="voice_time" data-stats-format="time">...</h3>
                 <h5><i class="fas fa-microphone"></i></h5>
             </div>
             <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
@@ -306,6 +317,7 @@
                 <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="total" data-stats-type="voice_time" data-stats-format="time">...</h3>
                 <h5 class="font-family-arial">Temps en vocal</h5>
             </div>
+
             <div class="separator"></div>
             <div class="secondary-stats">
                 <h3 class="no-break font-family-arial" data-stats-id="dashboard" data-stats-method="average-simpleIndicator-text" data-stats-type="voice_time" data-stats-format="time">...</h3>
@@ -316,14 +328,14 @@
 
     <!-- Stats #2 - Mentions/Pings -->
     <div class="stats-box right small col-lg-4 col-xs-12 flex box-center box center">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- square_responsive_ad -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>
-            window.onload = function() {
+        <div style="width:100%;height:18em;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- DA_carré_statistiques -->
+            <ins class="adsbygoogle" style="display:inline-block;width:300px;height:270px" data-ad-client="ca-pub-2548566032630877" data-ad-slot="7380048997"></ins>
+            <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            }
-        </script>
+            </script>
+        </div>
     </div>
 </div>
 </div>

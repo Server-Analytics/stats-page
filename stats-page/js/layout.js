@@ -116,6 +116,11 @@ function firstStatTabLoaded() {
 
         dashboardGeneralStatsBox[0]++;
     }
+
+    // Edit sidenav elements
+    changeElementContent("GLOBAL_name", guildPreviewObject.name);
+    changeElementContent("GLOBAL_member-count", reduceNumber(guildPreviewObject.approximate_member_count) + " membres");
+    document.getElementById("GLOBAL_guild-icon").src = `https://cdn.discordapp.com/icons/${guildPreviewObject.id}/${guildPreviewObject.icon}`;
 }
 
 // Get the device screen size
@@ -329,6 +334,8 @@ function overwriteStats(prefixId) {
         let statsTextIndicator = null;
         result = Math.abs(result);
 
+        if (!format) format = "reduce";
+
         // Format results if needed
         // This can be done using data-stats-format
         if (format) {
@@ -367,7 +374,7 @@ function overwriteStats(prefixId) {
                 }">${
                     subFormattedResult[0] == 0 ? "=" :
                     subFormattedResult[0] > 0 ? "+" : "-"
-                }</span> ${result}`;
+                }</span> ${ !isNaN(Math.abs(result)) ? Math.abs(result) : result }`;
 
                 statsTextIndicator = subFormattedResult[0] > 0 ? "plus" : "moins";
 
@@ -687,7 +694,7 @@ function groupBy(xs, key) {
 };
 
 function toTimeFormat(timeInSeconds) {
-    return timeInSeconds < 60 ? `${timeInSeconds}s` :
+    return timeInSeconds < 60 ? `${Math.round(timeInSeconds)}s` :
         timeInSeconds < 3600 ? `${Math.round(timeInSeconds/60)}min` :
         timeInSeconds < 3600 * 399 ? `${Math.round(timeInSeconds/3600)}h` :
         `${Math.round(timeInSeconds/(3600*24))}j`;
@@ -695,4 +702,14 @@ function toTimeFormat(timeInSeconds) {
 
 function roundToTwo(num) {
     return +(Math.round(num + "e+2") + "e-2");
+}
+
+function changeElementContent(elementId, value) {
+    document.getElementById(elementId).innerHTML = value;
+}
+
+function reduceNumber(number) {
+    return number < 99999 ? roundToTwo(number) :
+        number < 1000000 ? roundToTwo(number / 1000) + "k" :
+        roundToTwo(number / 1000000) + "M";
 }

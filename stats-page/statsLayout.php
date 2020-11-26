@@ -6,10 +6,10 @@ include("../../../../../../src/php/include/head.php");
 
     <div class="side-nav col-lg-2 fade-in" id="side-nav">
         <div class="w-100p flex small-profile align-center">
-            <img src="../src/components/images/background-loop1.png">
+            <img src="../src/components/images/background-loop1.png" id="GLOBAL_guild-icon">
             <div class="text">
-                <h4>Nom du serveur</h4>
-                <h5>36.5k membres</h5>
+                <h4 id="GLOBAL_name">Nom du serveur</h4>
+                <h5 id="GLOBAL_member-count">... membres</h5>
             </div>
         </div>
 
@@ -19,36 +19,36 @@ include("../../../../../../src/php/include/head.php");
         <div class="nav-element flex" id="nav_statTab1" onclick="loadStatTab('statTab1')">
             <p><i class="fas fa-tachometer-alt"></i> Dashboard</p>
         </div>
-        <div class="nav-element flex" id="nav_statTab2" onclick="loadStatTab('statTab2')">
-            <p><i class="fas fa-chart-bar"></i> Mes stats</p>
-        </div>
         <div class="nav-element flex" id="nav_statTab3" onclick="loadStatTab('statTab3')">
             <p><i class="fas fa-comments"></i> Messages</p>
         </div>
         <div class="nav-element flex" id="nav_statTab4" onclick="loadStatTab('statTab4')">
             <p><i class="fas fa-users"></i> Membres</p>
         </div>
+        <div class="nav-element flex" id="nav_statTab2" onclick="/*loadStatTab('statTab2')*/displayModal('coming_soon_modal');">
+            <p><i class="fas fa-chart-bar"></i> Mes stats</p>
+        </div>
 
         <div class="categorie">
             <p>avancé</p>
         </div>
-        <div class="nav-element flex">
+        <div class="nav-element flex" onclick="displayModal('coming_soon_modal');">
             <p><i class="fas fa-chart-line"></i> Projections</p>
         </div>
-        <div class="nav-element flex">
+        <div class="nav-element flex" onclick="displayModal('coming_soon_modal');">
             <p><i class="fas fa-crop"></i> Stats Avancées</p>
         </div>
 
         <div class="categorie">
             <p>paramètres</p>
         </div>
-        <div class="nav-element flex">
+        <div class="nav-element flex" onclick="displayModal('coming_soon_modal');">
             <p><i class="fas fa-star"></i> Server Premium</p>
         </div>
-        <div class="nav-element flex">
+        <div class="nav-element flex" onclick="displayModal('coming_soon_modal');">
             <p><i class="fas fa-cog"></i> Paramètres</p>
         </div>
-        <div class="nav-element flex">
+        <div class="nav-element flex" onclick="displayModal('coming_soon_modal');">
             <p><i class="fas fa-download"></i> Données</p>
         </div>
     </div>
@@ -114,7 +114,6 @@ include("../../../../../../src/php/include/head.php");
 
         <!-- Membres -->
         <div id="statTab4" class="statTab">
-            tab 4
         </div>
 
         <!-- Not loaded -->
@@ -141,9 +140,11 @@ include("../../../../../../src/php/include/head.php");
                         <h1>Ca arrive !</h1>
                         <h3>Plein de nouveautés se préparent <i class="fas fa-calendar-plus"></i></h3>
                     </div>
-                    <div class="flex center w-100p">
-                        <div class="statsButton blue">Rejoindre le serveur Discord</div>
-                    </div>
+                    <a href="https://discord.gg/JjSzeTc">
+                        <div class="flex center w-100p">
+                            <div class="statsButton blue">Rejoindre le serveur Discord</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

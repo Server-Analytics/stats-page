@@ -24,7 +24,7 @@
                         "datasets": {
                             labels: DATAS_statsDatas.readableDate.slice(),
                             datasets: [{
-                                label: 'Membres',
+                                label: 'Messages',
                                 data: DATAS_statsDatas.messages.slice(),
                                 backgroundColor: 'rgba(114,137,218,0.4)',
                                 borderColor: '#4a64b8',
@@ -48,7 +48,7 @@
                 </div>
                 <h4 class="font-family-arial">Messages</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="messages">
+                    <h3 class="font-family-arial flex" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="messages">
                         <span class="indicator equal">=</span> ...
                     </h3>
                     <h5><i class="fas fa-comment-alt"></i></h5>
@@ -62,8 +62,8 @@
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="messages">...</h3>
-                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator-text" data-stats-type="messages">...</h3>
+                    <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
@@ -105,15 +105,13 @@
     <!-- Second stats line -->
     <div class="w-100p flex mobile-wrap">
         <!-- Small: doughnut joins vs leaves -->
-        <div class="stats-box small col-lg-4 col-xs-12 static tip-overflow-visible">
+        <div class="stats-box small col-lg-4 col-xs-12 static">
             <div style="width:100%;height:18em;">
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- square_responsive_ad -->
-                <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <!-- DA_carré_statistiques -->
+                <ins class="adsbygoogle" style="display:inline-block;width:300px;height:270px" data-ad-client="ca-pub-2548566032630877" data-ad-slot="7380048997"></ins>
                 <script>
-                    window.onload = function() {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    }
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
         </div>
@@ -162,7 +160,7 @@
                 </div>
                 <h4 class="font-family-arial">Passés à écrire</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="comparison-indicator-text" data-stats-id="messages-tab" data-stats-type="typetime" data-stats-format="time">
+                    <h3 class="font-family-arial flex" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="typetime" data-stats-format="time">
                         <span class=" indicator equal">=</span> ...
                     </h3>
                     <h5><i class="fas fa-keyboard"></i></h5>
@@ -172,12 +170,12 @@
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
                     <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="typetime" data-stats-format="time">...</h3>
-                    <h5 class=" font-family-arial">Passés à écrire</h5>
+                    <h5 class="font-family-arial">Passés à écrire</h5>
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="typetime" data-stats-format="time">...</h3>
-                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator-text" data-stats-type="typetime" data-stats-format="time">...</h3>
+                    <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
@@ -215,7 +213,7 @@
                 </div>
                 <h4 class="font-family-arial">Mentions</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="mentions">...</h3>
+                    <h3 class="font-family-arial flex" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="mentions">...</h3>
                     <h5><i class="fas fa-at"></i></h5>
                 </div>
                 <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
@@ -227,8 +225,8 @@
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="mentions">...</h3>
-                    <h5 class=" font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator-text" data-stats-type="mentions">...</h3>
+                    <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
@@ -277,15 +275,13 @@
     <!-- Fourth stats line -->
     <div class="w-100p flex mobile-wrap">
         <!-- Small: Advert. -->
-        <div class="stats-box small col-lg-4 col-xs-12 static tip-overflow-visible">
+        <div class="stats-box small col-lg-4 col-xs-12 static">
             <div style="width:100%;height:18em;">
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- square_responsive_ad -->
-                <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <!-- DA_carré_statistiques -->
+                <ins class="adsbygoogle" style="display:inline-block;width:300px;height:270px" data-ad-client="ca-pub-2548566032630877" data-ad-slot="7380048997"></ins>
                 <script>
-                    window.onload = function() {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    }
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
         </div>
@@ -324,7 +320,7 @@
                 </div>
                 <h4 class="font-family-arial">Messages supprimés</h4>
                 <div class="flex align-center secondary-stats">
-                    <h3 class="font-family-arial" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="deletedMessages">
+                    <h3 class="font-family-arial flex" data-stats-method="average-indicator-text" data-stats-id="messages-tab" data-stats-type="deletedMessages">
                         <span class=" indicator equal">=</span> ...
                     </h3>
                     <h5><i class="fas fa-comment-slash"></i></h5>
@@ -334,37 +330,33 @@
             <div class="stats-info-mobile d-lg-none col-xs-12 flex">
                 <div class="primary-stats">
                     <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="total" data-stats-type="deletedMessages">...</h3>
-                    <h5 class=" font-family-arial">Messages supprimés</h5>
+                    <h5 class="font-family-arial">Messages Supprimés</h5>
                 </div>
                 <div class="separator"></div>
                 <div class="secondary-stats">
-                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator" data-stats-type="deletedMessages">...</h3>
-                    <h5 class="font-family-arial" data-stats-method="average-indicator-text">De {indicator} qu'en moyenne</h5>
+                    <h3 class="no-break font-family-arial" data-stats-id="messages-tab" data-stats-method="average-simpleIndicator-text" data-stats-type="deletedMessages">...</h3>
+                    <h5 class="font-family-arial" data-stats-type="stats-text-indicator">De {indicator} qu'en moyenne</h5>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="w-100p flex btw">
-    <div style="width:100%;height:10em;">
+<div class="w-100p flex wrap center" style="margin-top: 3em;">
+    <div>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- square_responsive_ad -->
-        <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <!-- SA_long_horizontal_ads -->
+        <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2548566032630877" data-ad-slot="4662370400"></ins>
         <script>
-            window.onload = function() {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            }
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
-    <div style="width:100%;height:10em;">
+    <div>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- square_responsive_ad -->
-        <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-2548566032630877" data-ad-slot="3986853067" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <!-- SA_long_horizontal_ads -->
+        <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2548566032630877" data-ad-slot="4662370400"></ins>
         <script>
-            window.onload = function() {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            }
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
 </div>

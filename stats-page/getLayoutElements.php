@@ -1,6 +1,7 @@
 <?php
 // For security reasons, we communicate with the database only once.
-include_once("../../../../../../src/php/config/oldDatabasePdo.php");
+include_once("../../../../../../src/php/config/oldDatabasePDO.php");
+
 ?>
     <div id="loaderGlobalContainer"></div>
     <div id="device-screen-size-sm" class="d-lg-none"></div>
@@ -31,6 +32,8 @@ include_once("../../../../../../src/php/config/oldDatabasePdo.php");
                 messages: <?php echo $guildInfos['messages']; ?>,
                 voice_time: <?php echo $guildInfos['voice_time'] / 1000; ?>,
                 type_time: <?php echo $guildInfos['type_time'] / 1000; ?>,
+                memberCount: guildPreviewObject.approximate_member_count,
+                presenceCount: guildPreviewObject.approximate_presence_count
             },
             infos: {
                 statsAccuracyDivider: 7200000,
